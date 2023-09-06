@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Alternet.Common.Python.v9</name>
+    </assembly>
+    <members>
+        <member name="T:Alternet.Common.Python.Deployment.PythonInstaller.DownloadInstallationSource">
+            <summary>
+            Installs Python from an embedded resource of a .NET assembly
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.Deployment.PythonInstaller.DownloadInstallationSource.DownloadUrl">
+            <summary>
+            The location on the web where to download the python distribution, for instance https://www.python.org/ftp/python/3.7.3/python-3.7.3-embed-amd64.zip
+            </summary>
+        </member>
+        <member name="T:Alternet.Common.Python.Deployment.PythonInstaller.EmbeddedResourceInstallationSource">
+            <summary>
+            Installs Python from an embedded resource of a .NET assembly
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.Deployment.PythonInstaller.EmbeddedResourceInstallationSource.Assembly">
+            <summary>
+            The .NET assembly that includes a python zip as embedded resource.
+            Note: you can get that by using <code>typeof(AnyTypeInYourAssembly).Assembly</code>
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.Deployment.PythonInstaller.EmbeddedResourceInstallationSource.ResourceName">
+            <summary>
+            The name of the zip file that has been included in the given assembly as embedded resource, i.e. "python-3.7.3-embed-amd64.zip".
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.Deployment.PythonInstaller.InstallationSource.Force">
+            <summary>
+            If true, retrieve the python file again even if it already exists at the destination path
+            </summary>
+        </member>
+        <member name="M:Alternet.Common.Python.Deployment.PythonInstaller.InstallationSource.RetrievePythonZip(System.String)">
+            <summary>
+            Retrieves (extracts or downloads etc) the python distribution zip file, saves it at the given destination path and returns the full path of the retrieved zip file.
+            Note: if Force==false and the file already exists this will simply return the path to the zip file.
+            </summary>
+            <param name="destinationDirectory">The directory location where the retrieved zip file should be placed</param>
+            <returns></returns>
+        </member>
+        <member name="E:Alternet.Common.Python.Deployment.PythonInstaller.LogMessage">
+            <summary>
+            Subscribe to this event to get installation log messages
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.Deployment.PythonInstaller.InstallPath">
+            <summary>
+            Path to install python. If needed, set before calling SetupPython().
+            <para>Default is: Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)</para>
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.Deployment.PythonInstaller.ExistingPythonHome">
+            <summary>
+            Set this to existing Python installation path to install packages into that installation.
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.Deployment.PythonInstaller.PythonDirectoryName">
+            <summary>
+            Name of the python directory. If left null, this is directly derived from the python distribution that is installed. If needed, set before calling SetupPython().
+            For instance, if you install https://www.python.org/ftp/python/3.7.3/python-3.7.3-embed-amd64.zip the directory defaults to python-3.7.3-embed-amd64
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.Deployment.PythonInstaller.EmbeddedPythonHome">
+            <summary>
+            The full path to the Python directory. Customize this by setting InstallPath and InstallDirectory
+            </summary>
+        </member>
+        <member name="M:Alternet.Common.Python.Deployment.PythonInstaller.InstallWheel(System.Reflection.Assembly,System.String,System.Boolean)">
+             <summary>
+             Install a python library (.whl file) in the embedded python installation of Python.Included
+            
+             Note: Installing python packages using a custom wheel may result in an invalid python environment if the packages don't match the python version.
+             To be safe, use pip by calling Installer.PipInstallModule.
+             </summary>
+             <param name="assembly">The assembly containing the embedded wheel</param>
+             <param name="resource_name">Name of the embedded wheel file i.e. "numpy-1.16.3-cp37-cp37m-win_amd64.whl"</param>
+             <param name="force"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Alternet.Common.Python.Deployment.PythonInstaller.InstallWheel(System.String,System.Boolean)">
+            <summary>
+            Install a python library (.whl file) in the embedded python installation of Python.Included
+            Note: Installing python packages using a custom wheel may result in an invalid python environment if the packages don't match the python version.
+            To be safe, use pip by calling Installer.PipInstallModule.
+            </summary>
+            <param name="wheelPath">The wheel file path.</param>
+            <param name="force">if set to <c>true</c> [force].</param>
+            <exception cref="T:System.ArgumentException">
+            The resource '{resource_name}' was not found in assembly '{assembly.FullName}'
+            or
+            The resource name '{resource_name}' did not contain a valid module name
+            </exception>
+        </member>
+        <member name="M:Alternet.Common.Python.Deployment.PythonInstaller.PipInstallWheel(System.Reflection.Assembly,System.String,System.Boolean)">
+             <summary>
+             Uses the local python-embedded pip module to install a python library (.whl file) in the embedded python installation of Python.Included
+            
+             Note: Installing python packages using a custom wheel may result in an invalid python environment if the packages don't match the python version.
+             To be safe, use pip by calling Installer.PipInstallModule.
+             </summary>
+             <param name="assembly">The assembly containing the embedded wheel</param>
+             <param name="resource_name">Name of the embedded wheel file i.e. "numpy-1.16.3-cp37-cp37m-win_amd64.whl"</param>
+             <param name="force"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Alternet.Common.Python.Deployment.PythonInstaller.PipInstallModule(System.String,System.String,System.Boolean)">
+            <summary>
+            Uses pip to find and install the specified package.
+            </summary>
+            <param name="module_name">The module/package to install </param>
+            <param name="force">When true, reinstall the packages even if it is already up-to-date.</param>
+            <param name="runInBackground">
+            Indicates that no command windows will be visible and the process will automatically
+            terminate when complete. When true, the command window must be manually closed before
+            processing will continue.
+            </param>
+        </member>
+        <member name="M:Alternet.Common.Python.Deployment.PythonInstaller.InstallPip">
+            <summary>
+            Download and install pip.
+            </summary>
+            <remarks>
+            Creates the lib folder under <see cref="P:Alternet.Common.Python.Deployment.PythonInstaller.PythonHome"/> if it does not exist.
+            </remarks>
+            <param name="runInBackground">
+            Indicates that no command windows will be visible and the process will automatically
+            terminate when complete. When true, the command window must be manually closed before
+            processing will continue.
+            </param>
+        </member>
+        <member name="M:Alternet.Common.Python.Deployment.PythonInstaller.RunCommand(System.String,System.String)">
+            <summary>
+            Runs the specified command as a local system cmd processes.
+            </summary>
+            <param name="command">The arguments passed to cmd.</param>
+            <param name="runInBackground">
+            Indicates that no command windows will be visible and the process will automatically
+            terminate when complete. When true, the command window must be manually closed before
+            processing will continue.
+            </param>
+        </member>
+        <member name="T:Alternet.Common.Python.IScriptGlobalItem">
+            <summary>
+            Represents properties declaration to describe a global object from the script.
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.IScriptGlobalItem.Name">
+            <summary>
+            When implemented by a class, gets or sets name of this item.
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.IScriptGlobalItem.Obj">
+            <summary>
+            When implemented by a class, gets or sets object contained by this item.
+            </summary>
+        </member>
+        <member name="T:Alternet.Common.Python.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Python.Properties.Resources.ParserBundle">
+            <summary>
+              Looks up a localized string similar to .
+            </summary>
+        </member>
+    </members>
+</doc>

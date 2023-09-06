@@ -1,0 +1,143 @@
+ALTERNET SOFTWARE LICENSE AGREEMENT
+
+Copyright (c) 2016-2023 ALTERNET SOFTWARE PTY LTD. All Rights Reserved 
+
+Email: support@alternetsoft.com 
+https://www.alternetsoft.com 
+
+LICENSE AGREEMENT
+
+You should carefully read the following terms and conditions before using the software. By using this software, you indicate that you accept the present license agreement.
+
+REGISTERED VERSION
+
+AlterNET Software licenses the AlterNET Studio on a per-developer basis. Every developer may install, copy or use AlterNET Studio by purchasing a perpetual developer license of this software. In case your organization has multiple developers working with the software, the number of licensed developers must equal or be less than the number of seats purchased.
+
+SOURCE CODE
+
+The universal edition of this software is shipped with the full source code, including the design-time code. If you develop any modifications, enhancements, derivative works, and/or extensions to the licensed source code, either independently or jointly with ALTERNET SOFTWARE PTY LTD, such modifications, enhancements, derivative works, and/or extensions and all rights associated therewith will be the exclusive property of ALTERNET SOFTWARE PTY LTD. You will not expressly or impliedly grant any rights, title, interest, or licenses to any such modifications, enhancements, derivative works, and/or extensions to any third party. You will, however, be entitled to use such modifications, enhancements, derivative works, and/or extensions to produce, distribute, and publish software under the terms set out in the "Royalty Free Distribution" section of this agreement.
+
+INTELLECTUAL PROPERTY RIGHTS
+
+The entire content of source files is protected by Australian and International Copyright Laws. Unauthorized reproduction, reverse-engineering, and distribution of all or any portion of the code contained in source files is strictly prohibited and may result in severe civil and criminal penalties and will be prosecuted to the maximum extent possible under the law. The source codes and all resulting intermediate files are confidential and proprietary trade secrets of ALTERNET SOFTWARE PTY LTD. The source code contained within the source and related files or any portion of its contents shall at no time be copied, transferred, sold, distributed, or otherwise made available to other individuals without prior written permission.
+
+EVALUATION VERSION
+
+If the software you have obtained is marked as a "Trial" or "Evaluation", you may install one copy of the software for testing purposes for a period of 30 calendar days ("Evaluation Period"). After that period, you must purchase the "Registered version" or remove the entire product from your system to continue using this product.
+
+ROYALTY FREE DISTRIBUTION
+
+The Registered version of the product and all accompanying .NET controls can be distributed in a binary form as part of an executable program only with the following conditions:
+
+    - Executables containing the software must be written using a registered copy of the software.
+    - Executables must add primary and substantial functionality and may not be merely a set or subset of any of the software's libraries, code, Redistributables, or other files.
+    - Software may include specific files ("Redistributables") for distribution with executables. These files may be included in the distribution WITHOUT any royalty fees owed to ALTERNET SOFTWARE PTY LTD.
+
+
+DISTRIBUTION OF EVALUATION VERSION
+
+Provided that you verify that you are distributing the Evaluation version, you are hereby licensed to make as many copies of the Evaluation version of the software and the documentation as you wish, give exact copies of the original Evaluation version to anyone; and distribute the Evaluation version of the software and the documentation in its unmodified form via electronic means. There is no charge for any of the above-mentioned actions. You are prohibited from charging, or requesting donations, for any such copies, however made, and from distributing the software and/or the documentation with other products (commercial or otherwise) without prior written permission.
+
+DISCLAIMER
+
+This software is provided on an "as is" basis without warranty, expressed or implied, including but not limited to the implied warranties of merchantability and fitness for a particular purpose. The person using the software bears all risks as to the quality and performance of the software. The author will not be liable for any special, incidental, consequential, indirect, or similar damages due to loss of data or any other reason, even if the author or an agent of the author has been advised of the possibility of such damages. In no event shall the author's liability for any damages ever exceed the price paid for the license to use the software, regardless of the form of the claim.
+
+REDISTRIBUTABLES
+
+The following file(s) are considered redistributables under this license agreement:
+
+Core Libraries
+Alternet.Common.dll
+Alternet.Common.Wpf.dll
+Alternet.Common.TypeScript.dll
+Alternet.Common.Python.dll
+Alternet.Editor.dll
+Alternet.Editor.Wpf.dll
+Alternet.FormDesigner.dll
+Alternet.FormDesigner.Wpf.dll
+Alternet.FormDesigner.Roslyn.dll
+Alternet.FormDesigner.Roslyn.WPf.dll
+Alternet.FormDesigner.TypeScript.dll
+Alternet.Scripter.dll
+Alternet.Scripter.Common.dll
+Alternet.Scripter.Debugger.dll
+Alternet.Scripter.Debugger.Common.dll
+Alternet.Scripter.Debugger.UI.dll
+Alternet.Scripter.Debugger.UI.Wpf.dll
+Alternet.Scripter.TypeScript.dll
+Alternet.Scripter.TypeScript.Debugger.dll
+Alternet.Scripter.TypeScript.Debugger.UI.dll
+Alternet.Syntax.dll
+Alternet.Syntax.Parsers.Advanced.dll
+Alternet.Syntax.Parsers.Advanced.Python.dll
+Alternet.Syntax.Parsers.Generic.dll
+Alternet.Syntax.Parsers.TextMate.dll
+Alternet.Syntax.Parsers.Roslyn.dll
+Alternet.Syntax.Parsers.TypeScript.dll
+Alternet.Syntax.Parsers.XAML.dll
+Alternet.Syntax.Parsers.Lsp.dll
+Alternet.Syntax.Parsers.Clangd.dll
+Alternet.Syntax.Parsers.Clangd.Embedded.dll
+Alternet.Syntax.Parsers.Lua.dll
+Alternet.Syntax.Parsers.Lua.Embedded.dll
+Alternet.Syntax.Parsers.PowerShell.dll
+Alternet.Syntax.Parsers.PowerShell.Embedded.dll
+Alternet.Syntax.Parsers.Python.dll
+Alternet.Syntax.Parsers.Python.Embedded.dll
+Alternet.Syntax.Parsers.Java.dll
+Alternet.Syntax.Parsers.Java.Embedded.dll
+Alternet.Syntax.Parsers.XML.dll
+Alternet.Syntax.Parsers.XML.Embedded.dll
+Alternet.Lsp.Servers.Llvm.Clangd.Bundle.dll
+Alternet.Lsp.Servers.Microsoft.PowerShell.dll
+Alternet.Lsp.Servers.Palantir.Pyls.Bundle.dll
+Alternet.Lsp.Servers.Pylsp.Bundle.dll
+Alternet.Lsp.Servers.Pyright.Bundle.dll
+Alternet.Lsp.Servers.Sumneko.Lua.Bundle.dll
+Alternet.Lsp.Servers.Eclipse.Jdt.Bundle.dll
+Alternet.Lsp.Servers.Eclipse.Lemminx.Bundle.dll
+
+Demo Projects Libraries
+Alternet.Editor.Common.dll
+Alternet.Editor.Common.Wpf.dll
+Alternet.Editor.Roslyn.dll
+Alternet.Editor.Roslyn.Wpf.dll
+Alternet.Editor.TypeScript.dll
+Alternet.Editor.TypeScript.Wpf.dll
+Alternet.Editor.IronPython.dll
+Alternet.Editor.IronPython.Wpf.dll
+Alternet.FormDesigner.Integration.dll
+Alternet.FormDesigner.Integration.Wpf.dll
+Alternet.Scripter.Integration.dll
+Alternet.Scripter.Integration.Wpf.dll
+
+This list also includes versioned file names, such as Alternet.Common.v7.dll
+
+ALTERNET SOFTWARE products are shipped with third-party DLLs; their distribution is covered under their respective third-party license agreements.
+
+.NET Compiler Platform ("Roslyn") https://github.com/dotnet/roslyn
+CLR Managed Debugger https://github.com/SymbolSource/Microsoft.Samples.Debugging
+ClearScript: https://github.com/Microsoft/ClearScript
+Chrome Dev Tools: https://github.com/BaristaLabs/chrome-dev-tools-runtime
+Sourcemap Toolkit: https://github.com/Microsoft/sourcemap-toolkit
+Json.NET: https://www.newtonsoft.com/json
+Language Server Protocol in C#: https://github.com/OmniSharp/csharp-language-server-protocol
+Markdig: https://github.com/lunet-io/markdig
+TextMateSharp: https://github.com/danipen/TextMateSharp
+
+IronPython: https://github.com/IronLanguages/ironpython2
+Python.NET: https://github.com/pythonnet/pythonnet
+
+LSP server bundle modules are freely redistributable under their respective open-source licenses:
+clangd: https://clang.llvm.org/extra/clangd/
+Lua Language Server: https://github.com/sumneko/lua-language-server
+PowerShell Editor Services: https://github.com/PowerShell/PowerShellEditorServices
+Python Language Server: https://github.com/palantir/python-language-server
+Python Pylsp Language Server: https://github.com/python-lsp/python-lsp-server
+Python Pyright Language Server: https://github.com/microsoft/pyright
+Java Language Server: https://github.com/eclipse/eclipse.jdt.ls
+XML Language Server: https://github.com/eclipse/lemminx
+
+Design Adapter Protocol server bundle modules are freely redistributable under their respective open-source licenses:
+C++ DAP: https://github.com/vadimcn/vscode-lldb
+Python DAP: https://github.com/microsoft/debugpy
