@@ -1,0 +1,300 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Alternet.Scripter.Common.v9</name>
+    </assembly>
+    <members>
+        <member name="T:Alternet.Scripter.FileLoadEventArgs">
+            <summary>
+            Provides data for the <c>IScriptRun.FileLoad</c> event.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.FileLoadEventArgs.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <c>FileLoadEventArgs</c> class with specified file.
+            </summary>
+            <param name="fileName">File to load.</param>
+        </member>
+        <member name="P:Alternet.Scripter.FileLoadEventArgs.Handled">
+            <summary>
+            Gets or sets a value indicating whether the FileLoad event was handled.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.FileLoadEventArgs.Text">
+            <summary>
+            Gets or sets a text contained in the file.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.FileLoadEventArgs.FileName">
+            <summary>
+            Gets file name to load.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.ScriptErrorEventArgs">
+            <summary>
+            Provides data for the <c>IScriptHost.ScriptError</c> and <c>IScriptRun.ScriptError</c> events.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.ScriptErrorEventArgs.#ctor(Alternet.Scripter.ScriptCompilationDiagnostic[])">
+            <summary>
+            Initializes a new instance of the <c>ScriptErrorArgs</c> class with specified parameter.
+            </summary>
+            <param name="errors">Specifies collection of errors.</param>
+        </member>
+        <member name="M:Alternet.Scripter.ScriptErrorEventArgs.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <c>ScriptErrorArgs</c> class with specified parameter.
+            </summary>
+            <param name="errorMessage">Specifies error information for the new instance.</param>
+        </member>
+        <member name="P:Alternet.Scripter.ScriptErrorEventArgs.ErrorMessage">
+            <summary>
+            Gets a message that describes the current error.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.ScriptErrorEventArgs.Handled">
+            <summary>
+            Gets or sets a value indicating whether the error event was handled.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.ScriptErrorEventArgs.Errors">
+            <summary>
+            Represents errors collection.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.IScriptRunBase">
+            <summary>
+            Represents methods and properties declaration to describe runner for script engine.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.IScriptRunBase.ScriptCompiled">
+            <summary>
+            When implemented by a class, occurs when the script engine running successfully.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.IScriptRunBase.ScriptError">
+            <summary>
+            When implemented by a class, occurs when the script engine running is failed.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.IScriptRunBase.ScriptReset">
+            <summary>
+            When implemented by a class, occurs when the script engine is reset.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.IScriptRunBase.FileLoad">
+            <summary>
+            When implemented by a class, occurs when script code is loaded from file.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.IScriptRunBase.ScriptRunning">
+            <summary>
+            When implemented by a class, occurs when script engine tries to running script.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.IScriptRunBase.ScriptExecuted">
+            <summary>
+            When implemented by a class, occurs when script engine executes the script.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.IScriptRunBase.CaseSensitive">
+            <summary>
+            When implemented by a class, indicates whether script language is case sensitive.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.IScriptRunBase.Compiled">
+            <summary>
+            When implemented by a class, gets boolean value indicating that script has been compiled and ready to be executed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.IScriptRunBase.Executed">
+            <summary>
+            When implemented by a class, gets boolean value indicating that script has been executed at least once.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.IScriptRunBase.Run">
+            <summary>
+            When implemented by a class, executes script starting from the main entry point.
+            </summary>
+            <returns>Return value of the script being executed.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.IScriptRunBase.EvaluateExpression(System.String)">
+            <summary>
+            When implemented by a class, evaluates specified expression.
+            </summary>
+            <param name="expression">Expression to evaluate.</param>
+            <returns>An object containing return value of the expression being evaluated.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.IScriptRunBase.Compile">
+            <summary>
+            When implemented by a class, initializes script engine and compiles the script.
+            </summary>
+            <returns>True if succeed, otherwise false.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.IScriptRunBase.Reset">
+            <summary>
+            When implemented by a class, removes the script engine from the running state and disconnects automatically bound event handlers.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.IScriptRunBase.LoadScript(System.String)">
+            <summary>
+            When implemented by a class, load script from specified file.
+            </summary>
+            <param name="fileName">File name that contains script to load.</param>
+            <returns>String representation of the file.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.IScriptRunBase.OnScriptCompiled">
+            <summary>
+            When implemented by a class, invokes <c>ScriptCompiled</c> event handler.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.IScriptRunBase.OnScriptRunning">
+            <summary>
+            When implemented by a class, invokes <c>ScriptRunning</c> event handler.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.IScriptRunBase.OnScriptExecuted">
+            <summary>
+            When implemented by a class, invokes <c>ScriptExecuted</c> event handler.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.IScriptRunBase.OnScriptError(Alternet.Scripter.ScriptErrorEventArgs)">
+            <summary>
+            When implemented by a class, invokes <c>ScriptError</c> event handler.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.IScriptRunBase.OnScriptReset">
+            <summary>
+            When implemented by a class, invokes <c>ScriptReset</c> event handler.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.IScriptRunBase.OnFileLoad(System.String)">
+            <summary>
+            When implemented by a class, invokes <c>FileLoad</c> event handler.
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Alternet.Scripter.IScriptSourceBase">
+            <summary>
+            Represents methods and properties to work with script text, files or projects.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.IScriptSourceBase.ProjectFileName">
+            <summary>
+            When implemented by a class, gets a file name of the Visual Studio project containing script files to execute.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.IScriptSourceBase.ScriptFile">
+            <summary>
+            When implemented by a class, gets single script file to execute.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.IScriptSourceBase.ScriptCode">
+            <summary>
+            When implemented by a class, gets script code to execute.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.IScriptSourceBase.Expression">
+            <summary>
+            When implemented by a class, gets expression to evaluate.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.IScriptSourceBase.HasProject">
+            <summary>
+            When implemented by a class, returns boolean value indicating whether <c>ScriptSource</c> is associated with the project.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.IScriptSourceBase.HasScriptFile">
+            <summary>
+            When implemented by a class, returns boolean value indicating whether <c>ScriptSource</c> contains script file to execute.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.IScriptSourceBase.HasScriptCode">
+            <summary>
+            When implemented by a class, returns boolean value indicating whether <c>ScriptSource</c> contains script code to execute.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.IScriptSourceBase.HasExpression">
+            <summary>
+            When implemented by a class, returns boolean value indicating whether <c>ScriptSource</c> contains expression to evaluate.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.ScriptCompilationDiagnosticKind">
+            <summary>
+            Defines script error severity
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.ScriptCompilationDiagnosticKind.Error">
+            <summary>
+            Represents compiler error
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.ScriptCompilationDiagnosticKind.Warning">
+            <summary>
+            Represents compiler warning
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.ScriptCompilationDiagnosticKind.Info">
+            <summary>
+            Represents information message
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.ScriptCompilationDiagnostic">
+            <summary>
+            Provides data for compiler error.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.ScriptCompilationDiagnostic.UserData">
+            <summary>
+            Gets or sets object that contains user defined data related to diagnostic.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.ScriptCompilationDiagnostic.Zero">
+            <summary>
+            Gets an empty <c>ScriptCompilationDiagnostic</c> object.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.ScriptCompilationDiagnostic.IsEmpty">
+            <summary>
+            Gets a boolean value indicating whether diagnostic is empty (contains no data).
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.ScriptCompilationDiagnostic.Column">
+            <summary>
+            Gets or sets column number of diagnostic.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.ScriptCompilationDiagnostic.FileName">
+            <summary>
+            Gets or sets name of file of diagnostic.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.ScriptCompilationDiagnostic.Kind">
+            <summary>
+            Gets or sets diagnostic's kind.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.ScriptCompilationDiagnostic.Line">
+            <summary>
+            Gets or sets line number of diagnostic.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.ScriptCompilationDiagnostic.Message">
+            <summary>
+            Gets or sets message describes compilation error.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.ScriptCompilationDiagnostic.Code">
+            <summary>
+            Gets or sets string of code related to diagnostic.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.ScriptCompilationDiagnostic.ToString">
+            <summary>
+            Returns a <c>String</c> that represents the diagnostic.
+            </summary>
+            <returns>A <c>String</c> that represents the <c>ScriptCompilationDiagnostic</c>.</returns>
+        </member>
+    </members>
+</doc>
