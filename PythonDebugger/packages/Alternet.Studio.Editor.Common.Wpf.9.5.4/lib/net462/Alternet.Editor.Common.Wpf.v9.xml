@@ -1,0 +1,848 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Alternet.Editor.Common.Wpf.v9</name>
+    </assembly>
+    <members>
+        <member name="T:Alternet.Editor.Common.Wpf.DlgConfirmSave">
+            <summary>
+            Interaction logic for DlgConfirmSave.xaml
+            </summary>
+            <summary>
+            DlgConfirmSave
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.DlgConfirmSave.#ctor">
+            <summary>
+            Initializes a new instance of the <c>DlgConfirmSave</c> class with default settings.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.DlgConfirmSave.#ctor(System.String,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Initializes a new instance of the <c>DlgConfirmSave</c> class with specified settings.
+            </summary>
+            <param name="title">Text associated with this new instance.</param>
+            <param name="unsavedFiles">List of modified files to confirm.</param>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.DlgConfirmSave.Confirm">
+            <summary>
+            Gets a boolean value indicating whether saving operations are accepted.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.DlgConfirmSave.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.ProjectTypes">
+            <summary>
+            Represents the data required to create a new project.
+            </summary>
+        </member>
+        <member name="F:Alternet.Editor.Common.Wpf.ProjectTypes.SupportedProjectTypes">
+            <summary>
+            A list of project types that can be created.
+            </summary>
+        </member>
+        <member name="F:Alternet.Editor.Common.Wpf.ProjectTypes.SupportedLanguages">
+            <summary>
+            A list of supported project languages.
+            </summary>
+        </member>
+        <member name="F:Alternet.Editor.Common.Wpf.ProjectTypes.ProjectItems">
+            <summary>
+            A list of supported project items.
+            </summary>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.DlgNewProject">
+            <summary>
+            Interaction logic for MainWindow.xaml
+            </summary>
+            <summary>
+            DlgNewProject
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.DlgNewProject.#ctor">
+            <summary>
+            Provide a new project dialog.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.DlgNewProject.#ctor(Alternet.Common.Projects.ProjectCreationData,System.String[],System.String[])">
+            <summary>
+            Initializes a new instance of the <c>DlgNewProject</c> class with speicfied parameters.
+            </summary>
+            <param name="projectData">Data for a newly created project.</param>
+            <param name="supportedLanguages">List of supported project languages, like C# or Visual Basic.</param>
+            <param name="supportedProjectTypes">List of supported project types, like ClassLibrary or WindowsFormsApp.</param>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.DlgNewProject.ProjectData">
+            <summary>
+            Gets a <c>ProjectCreationData</c> as a result of dialog execution.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.DlgNewProject.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.DotNetProjectExplorer">
+            <summary>
+            Represents methods used to explore particular project in the TreeView control.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.DotNetProjectExplorer.#ctor">
+            <summary>
+            Initializes a new instance of the <c>ProjectExplorer</c> class with default settings.
+            </summary>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.FindResultClickEventArgs">
+            <summary>
+            Provides data for the <c>FindResultClick</c> event.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.FindResultClickEventArgs.FileRange">
+            <summary>
+            Gets or sets file range in the source code related to the current element.
+            </summary>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.FindResults">
+            <summary>
+            Interaction logic for FindResults.xaml
+            </summary>
+            <summary>
+            FindResults
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.FindResults.#ctor">
+            <summary>
+            Initializes a new instance of the <c>FindResults</c> class with default settings.
+            </summary>
+        </member>
+        <member name="E:Alternet.Editor.Common.Wpf.FindResults.FindResultClick">
+            <summary>
+            Occurs when particular search result was clicked.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.FindResults.ShowFilePath">
+            <summary>
+            Gets or sets a value indicating whether the control should display the full file path for the found result.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.FindResults.ShowFileNames">
+            <summary>
+            Gets or sets a value indicating whether the control should display the file name for the found result.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.FindResults.ShowLineNumbers">
+            <summary>
+            Gets or sets a value indicating whether the control should display a line number for the found result.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.FindResults.ShowSourceText">
+            <summary>
+            Gets or sets a value indicating whether the control should display source text for the found result.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.FindResults.SelectedRange">
+            <summary>
+            Gets IFileRange related to the selected found result.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.FindResults.ResultsAvailable">
+            <summary>
+            Gets a boolean value indicates whether the find results available.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.FindResults.Clear">
+            <summary>
+            Clears list of results.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.FindResults.Localize">
+            <summary>
+            Localizes string resources.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.FindResults.AddFindResult(Alternet.Common.IFileRange)">
+            <summary>
+            Adds specified range to the collection of search results.
+            </summary>
+            <param name="range"><c>IFileRange</c> to add.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.FindResults.AddFindResults(Alternet.Common.IRangeList,System.Boolean)">
+            <summary>
+            Fills <c>FindResults</c> content from specified range list.
+            </summary>
+            <param name="references">List of ranges containing search results.</param>
+            <param name="preserveExisting">Indicates if existing references should be kept.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.FindResults.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.FormOpenMode">
+            <summary>
+            Defines design or code mode for TreeNode data.
+            </summary>
+        </member>
+        <member name="F:Alternet.Editor.Common.Wpf.FormOpenMode.Design">
+            <summary>
+            Specifies design mode.
+            </summary>
+        </member>
+        <member name="F:Alternet.Editor.Common.Wpf.FormOpenMode.Code">
+            <summary>
+            Specifies code mode.
+            </summary>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.FormNodeData">
+            <summary>
+            Represents data contained in the TreeNode for the <c>Alternet.Editor.Roslyn.Wpf.ProjectExplorer</c>.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.FormNodeData.#ctor(System.String,System.String,Alternet.Editor.Common.Wpf.FormOpenMode)">
+            <summary>
+            Initializes a new instance of the <c>FormNodeData</c> class with specified parameters.
+            </summary>
+            <param name="formId">Id of the form related to the node.</param>
+            <param name="fileName">Name of file related to the node.</param>
+            <param name="openMode">Mode of the node.</param>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.FormNodeData.FileName">
+            <summary>
+            Gets name of the file related to the node.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.FormNodeData.FormId">
+            <summary>
+            Gets Id of the form related to the node.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.FormNodeData.OpenMode">
+            <summary>
+            Gets openmode of the node.
+            </summary>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.NavigationHistory">
+            <summary>
+            Represents methods to store and restore text location for navigation purposes.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.NavigationHistory.GetNextHistory(System.Collections.Generic.KeyValuePair{System.String,Alternet.Common.SymbolLocation}@)">
+            <summary>
+            Moves to the next location in the stored history collection.
+            </summary>
+            <param name="pair">Receives location information.</param>
+            <returns>Index of the current location information in the collection.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.NavigationHistory.GetPrevHistory(System.Collections.Generic.KeyValuePair{System.String,Alternet.Common.SymbolLocation}@)">
+            <summary>
+            Moves to the previous location in the stored history collection.
+            </summary>
+            <param name="pair">Receives location information.</param>
+            <returns>Index of the current location information in the collection.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.NavigationHistory.AddToHistory(Alternet.Common.SymbolLocation,System.String)">
+            <summary>
+            Adds specified location to the history collection.
+            </summary>
+            <param name="location">SymbolLocation to add.</param>
+            <param name="text">Text in the code at specified location.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.NavigationHistory.SaveCurrentLocationToHistory(System.Drawing.Point,System.String,System.String)">
+            <summary>
+            Adds specified location to the history collection.
+            </summary>
+            <param name="position">Position in the code to add.</param>
+            <param name="fileName">Name of file where code is located.</param>
+            <param name="code">Text in the code at specified location.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.NavigationHistory.ClearHistory(System.Windows.Controls.ItemCollection,System.Windows.UIElement,System.Windows.UIElement,System.Windows.UIElement,System.Windows.RoutedEventHandler)">
+            <summary>
+            Clears navigation history and updates all related visual controls.
+            </summary>
+            <param name="items">List of items to be updated accordingly to the history collection.</param>
+            <param name="backward">Visual element related to the backward navigation.</param>
+            <param name="backwardMenu">Menu related to the backward navigation.</param>
+            <param name="forward">Visual element related to the forward navigation.</param>
+            <param name="action">Action to be performed when history element is clicked.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.NavigationHistory.ClearCurrentHistory(System.Windows.Controls.ItemCollection,System.Windows.UIElement,System.Windows.UIElement,System.Windows.UIElement,System.Windows.RoutedEventHandler)">
+            <summary>
+            Clears only forward part of the navigation history and updates all related visual controls.
+            </summary>
+            <param name="items">List of items to be updated accordingly to the history collection.</param>
+            <param name="backward">Visual element related to the backward navigation.</param>
+            <param name="backwardMenu">Menu related to the backward navigation.</param>
+            <param name="forward">Visual element related to the forward navigation.</param>
+            <param name="action">Action to be performed when history element is clicked.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.NavigationHistory.UpdateHistory(System.Windows.Controls.ItemCollection,System.Int32,System.Windows.UIElement,System.Windows.UIElement,System.Windows.UIElement,System.Windows.RoutedEventHandler)">
+            <summary>
+            Updates visual history elements accordingly the new history index.
+            </summary>
+            <param name="items">List of items to be updated accordingly to the history collection.</param>
+            <param name="newIndex">New current history index.</param>
+            <param name="backward">Visual element related to the backward navigation.</param>
+            <param name="backwardMenu">Menu related to the backward navigation.</param>
+            <param name="forward">Visual element related to the forward navigation.</param>
+            <param name="action">Action to be performed when history element is clicked.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.NavigationHistory.UpdateHistory(System.Windows.Controls.ItemCollection,System.Int32,System.Windows.UIElement,System.Windows.UIElement,System.Windows.UIElement,System.Boolean,System.Windows.RoutedEventHandler)">
+            <summary>
+            Updates visual history elements accordingly the new history index.
+            </summary>
+            <param name="items">List of items to be updated accordingly to the history collection.</param>
+            <param name="newIndex">New current history index.</param>
+            <param name="backward">Visual element related to the backward navigation.</param>
+            <param name="backwardMenu">Menu related to the backward navigation.</param>
+            <param name="forward">Visual element related to the forward navigation.</param>
+            <param name="relative">True if visual controls should display only part of the history list.</param>
+            <param name="action">Action to be performed when history element is clicked.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.NavigationHistory.BeginUpdate">
+            <summary>
+            Prevents navigation history updating until calling <c>EndUpdate</c> method.
+            </summary>
+            <returns>Number of history updating locks.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.NavigationHistory.EndUpdate">
+            <summary>
+            When implemented by a class, re-enables navigation history updating turned off by calling <c>BeginUpdate</c> method.
+            </summary>
+            <returns>Number of history updating locks.</returns>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.ProjectExplorer">
+            <summary>
+            Represents methods used to explore particular project in the TreeView control.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ProjectExplorer.#ctor">
+            <summary>
+            Initializes a new instance of the <c>ProjectExplorer</c> class with default settings.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ProjectExplorer.ExplorerTree">
+            <summary>
+            Gets or sets System.Windows.Forms.TreeView control used to explore project's content.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ProjectExplorer.GetFileNameFromNode(System.Windows.Controls.TreeViewItem)">
+            <summary>
+            Get the name of the file related to the node.
+            </summary>
+            <param name="node">Node to check.</param>
+            <returns>File name if specified; otherwise, an empty string.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ProjectExplorer.UpdateExplorer(Alternet.Common.Projects.Project)">
+            <summary>
+            Updates explorer content from given project.
+            </summary>
+            <param name="project"><c>Project</c> to explore.</param>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.ScriptCodeEdit">
+            <summary>
+            Represents advanced multi-line text edit control that implements <c>IScriptEdit</c> interface.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.#cctor">
+            <summary>
+            Initializes static fields used in the <see cref="T:Alternet.Editor.Common.Wpf.ScriptCodeEdit"/> class.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.#ctor">
+            <summary>
+            Initializes a new instance of the <c>ScriptCodeEdit</c> class with default settings.
+            </summary>
+        </member>
+        <member name="E:Alternet.Editor.Common.Wpf.ScriptCodeEdit.StatusChanged">
+            <summary>
+            Occurs when <c>IScriptEdit</c> status was changed, for example when selection changed, caret position moved, text edited, amount of lines changed, lexer changed, etc.
+            </summary>
+        </member>
+        <member name="E:Alternet.Editor.Common.Wpf.ScriptCodeEdit.ParserChanged">
+            <summary>
+            Occurs when <c>IScriptEdit</c> parser was changed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ScriptCodeEdit.Parsers">
+            <summary>
+            Gets a list of parser types used to provide language analysis in accordance with the language name.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ScriptCodeEdit.CreateParserFunc">
+            <summary>
+            Gets or sets a function that creates a parser instance.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ScriptCodeEdit.Modified">
+            <summary>
+            Gets or sets a value indicating whether the control's text content is modified.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ScriptCodeEdit.Source">
+            <inheritdoc/>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ScriptCodeEdit.FileName">
+            <summary>
+            Gets or sets the name of the file that holds text source content.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ScriptCodeEdit.CurrentLine">
+            <summary>
+            Gets or sets the current line position within the control's text content.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ScriptCodeEdit.CurrentChar">
+            <summary>
+            Gets or sets the current char position within the control's text content.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ScriptCodeEdit.StatusText">
+            <summary>
+            Gets a string representation of <c>IScriptEdit</c> status, e.g. position in the text, modified state, etc.
+            This property is obsolete.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ScriptCodeEdit.Status">
+            <summary>
+            Gets <c>IScriptEdit</c> status, e.g. position in the text, modified state, etc.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.SelectAll">
+            <summary>
+            Selects all lines in the control's content.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.SelectWord">
+            <summary>
+            Selects a word at the current position in the control.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.Undo">
+            <summary>
+            Performs the last undo operation.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.Redo">
+            <summary>
+            Performs the last redo operation.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.BeginUpdate">
+            <summary>
+            Prevents <c>IScriptEdit</c> updating until calling <c>EndUpdate</c> method.
+            </summary>
+            <returns>Number of the updating locks.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.EndUpdate">
+            <summary>
+            Re-enables <c>IScriptEdit</c> updating, that was turn of by calling <c>BeginUpdate</c> method.
+            </summary>
+            <returns>Number of outline list updating locks.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.SaveFile(System.String)">
+            <summary>
+            Saves text content to the specific file.
+            </summary>
+            <param name="fileName">Name of file to save content.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.LoadFile(System.String)">
+            <summary>
+            Loads the contents of the specified file.
+            </summary>
+            <param name="fileName">Name of file to load text.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.GotoLine">
+            <summary>
+            Displays the goto dialog.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.Print">
+            <summary>
+            Sends <c>IScriptEdit</c> content to the printer.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.PrintPreview">
+            <summary>
+            Displays the print preview dialog.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.GetSymbolAtCursor">
+            <summary>
+            Returns a simple text data that describes the current part of the text.
+            </summary>
+            <returns>Short description of the code under the current position.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEdit.GetLine(System.Int32)">
+            <summary>
+            Gets string line at the specified index.
+            </summary>
+            <param name="index">Index of line in the collection.</param>
+            <returns>Text at specified line index.</returns>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.ScriptCodeEditStatus">
+            <summary>
+            Represents the status, e.g., position in the text, modified state, etc., of the <c>IScriptEdit</c> control.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.ScriptCodeEditStatus.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <c>ScriptCodeEditStatus</c> class with specified parameters.
+            </summary>
+            <param name="position">Editor's position.</param>
+            <param name="modified">Editor's modified state.</param>
+            <param name="overwrite">Editor's overwrite mode.</param>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ScriptCodeEditStatus.Position">
+            <summary>
+            Gets a value that describes editor's position.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ScriptCodeEditStatus.Modified">
+            <summary>
+            Gets a value that describes editor's modified state.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.ScriptCodeEditStatus.Overwrite">
+            <summary>
+            Gets a value that describes editor's overwrite mode.
+            </summary>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.SolutionExplorer">
+            <summary>
+            Represents methods used to explore particular solution in the TreeView control.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.SolutionExplorer.#ctor">
+            <summary>
+            Initializes a new instance of the <c>SolutionExplorer</c> class with default settings.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.SolutionExplorer.ExplorerTree">
+            <summary>
+            Gets or sets System.Windows.Forms.TreeView control used to explore solution's content.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.SolutionExplorer.UpdateExplorer(Alternet.Common.Projects.DotNet.DotNetSolution)">
+            <summary>
+            Updates explorer content from given solution.
+            </summary>
+            <param name="solution"><c>Solution</c> to explore.</param>
+        </member>
+        <member name="T:Alternet.Editor.Common.Wpf.IScriptEdit">
+            <summary>
+            Represents properties and methods that are common for any multi-line Edit control.
+            </summary>
+        </member>
+        <member name="E:Alternet.Editor.Common.Wpf.IScriptEdit.StatusChanged">
+            <summary>
+            When implemented by a class, occurs when <c>IScriptEdit</c> status was changed, for example when selection changed, caret position moved, text edited, amount of lines changed, lexer changed, etc.
+            </summary>
+        </member>
+        <member name="E:Alternet.Editor.Common.Wpf.IScriptEdit.TextChanged">
+            <summary>
+            When implemented by a class, occurs when <c>IScriptEdit</c> text content was modified.
+            </summary>
+        </member>
+        <member name="E:Alternet.Editor.Common.Wpf.IScriptEdit.ParserChanged">
+            <summary>
+            When implemented by a class, occurs when <c>IScriptEdit</c> parser was changed.
+            </summary>
+        </member>
+        <member name="E:Alternet.Editor.Common.Wpf.IScriptEdit.ModifiedChanged">
+            <summary>
+            When implemented by a class, occurs when <c>IScriptEdit</c> modified state is changed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.Parent">
+            <summary>
+            When implemented by a class, gets the logical parent element of this edit.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.FileName">
+            <summary>
+            When implemented by a class, gets or sets the name of the file that holds text source content.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.StatusText">
+            <summary>
+            When implemented by a class, gets a string representation of <c>IScriptEdit</c> status, e.g. position in the text, modified state, etc.
+            This property is obsolete.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.Status">
+            <summary>
+            When implemented by a class, gets <c>IScriptEdit</c> status, e.g. position in the text, modified state, etc.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.DefaultMenu">
+            <summary>
+            When implemented by a class, gets default context menu for the <c>IScriptEdit</c> control.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.CanCut">
+            <summary>
+            When implemented by a class, indicates whether selected text can be cut to the clipboard.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.CanCopy">
+            <summary>
+            When implemented by a class, indicates whether selected text can be copied to the clipboard.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.CanPaste">
+            <summary>
+            When implemented by a class, indicates whether the control can paste some text from the clipboard.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.CanDelete">
+            <summary>
+            When implemented by a class, indicates whether selected text can be deleted.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.CanUndo">
+            <summary>
+            When implemented by a class, indicates whether the undo operation can be performed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.CanRedo">
+            <summary>
+            When implemented by a class, indicates whether the redo operation can be performed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.Modified">
+            <summary>
+            When implemented by a class, gets a value indicating whether the control's text content is modified.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.CurrentLine">
+            <summary>
+            When implemented by a class, gets or sets the current line position within the control's text content.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.CurrentChar">
+            <summary>
+            When implemented by a class, gets or sets the current char position within the control's text content.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.ReadOnly">
+            <summary>
+            When implemented by a class, gets or sets a value indicating whether the control's content is read-only.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.Text">
+            <summary>
+            When implemented by a class, gets or sets the string collection as a single string with the individual lines delimited by carriage returns.
+            </summary>
+        </member>
+        <member name="P:Alternet.Editor.Common.Wpf.IScriptEdit.Position">
+            <summary>
+            When implemented by a class, gets or sets the current position within the control's text content.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.ApplyTemplate">
+            <summary>
+            When implemented by a class, builds the current template's visual tree if necessary, and returns a value that indicates whether the visual tree was rebuilt by this call.
+            </summary>
+            <returns>True if visuals were added to the tree; returns false otherwise.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.Focus">
+            <summary>
+            When implemented by a class, sets input focus to the control.
+            </summary>
+            <returns>true if the input focus request was successful; otherwise, false.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.Cut">
+            <summary>
+            When implemented by a class, cuts selected text to the Clipboard.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.Copy">
+            <summary>
+            When implemented by a class, copies selected text to the Clipboard.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.Paste">
+            <summary>
+            When implemented by a class, pastes the content of the Clipboard to the <c>IScriptEdit</c> control, replacing selected text if needed.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.Delete">
+            <summary>
+            When implemented by a class, deletes selected text from the control.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.SelectAll">
+            <summary>
+            When implemented by a class, selects all lines in the control's content.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.SelectWord">
+            <summary>
+            When implemented by a class, selects a word at the current position in the control.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.Undo">
+            <summary>
+            When implemented by a class, performs the last undo operation.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.Redo">
+            <summary>
+            When implemented by a class, performs the last redo operation.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.Search">
+            <summary>
+            When implemented by a class, displays the search dialog.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.Replace">
+            <summary>
+            When implemented by a class, displays the replace dialog.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.GotoLine">
+            <summary>
+            When implemented by a class, displays the goto dialog.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.MakeVisible(System.Drawing.Point,System.Boolean)">
+            <summary>
+            When implemented by a class, scrolls the control's content, if necessary, to ensure a specified text position is in view.
+            </summary>
+            <param name="position">Position in the text to make visible.</param>
+            <param name="centerLine">Specifies whether a given line must be centered within control's client area.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.SaveFile(System.String)">
+            <summary>
+            When implemented by a class, saves text content to the specific file.
+            </summary>
+            <param name="fileName">Name of file to save content.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.LoadFile(System.String)">
+            <summary>
+            When implemented by a class, loads the contents of the specified file.
+            </summary>
+            <param name="fileName">Name of file to load text.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.Print">
+            <summary>
+            When implemented by a class, sends <c>IScriptEdit</c> content to the printer.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.PrintPreview">
+            <summary>
+            When implemented by a class, displays the print preview dialog.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.Find(System.String)">
+            <summary>
+            When implemented by a class, searches for given text within the control's contents.
+            </summary>
+            <param name="text">Text to find.</param>
+            <returns>True if search succeed; otherwise false.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.MoveToLine(System.Int32)">
+            <summary>
+            When implemented by a class, moves the current position to the specified line.
+            </summary>
+            <param name="y">Index of line to move to.</param>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.GetSymbolAtCursor">
+            <summary>
+            When implemented by a class, returns a simple text data that describes the current part of the text.
+            </summary>
+            <returns>Short description of the code under the current position.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.MoveLineEnd">
+            <summary>
+            When implemented by a class, moves the current position to the last character of current line.
+            </summary>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.BeginUpdate">
+            <summary>
+            When implemented by a class, prevents <c>IScriptEdit</c> updating until calling <c>EndUpdate</c> method.
+            </summary>
+            <returns>Number of the updating locks.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.EndUpdate">
+            <summary>
+            When implemented by a class, re-enables <c>IScriptEdit</c> updating, that was turn of by calling <c>BeginUpdate</c> method.
+            </summary>
+            <returns>Number of outline list updating locks.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.GetLine(System.Int32)">
+            <summary>
+            When implemented by a class, gets string line at the specified index.
+            </summary>
+            <param name="index">Index of line in the collection.</param>
+            <returns>Text at specified line index.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.FindDeclaration">
+            <summary>
+            When implemented by a class, finds the declaration of the symbol at the current position.
+            </summary>
+            <returns>Declaration symbol location.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.FindDeclaration(System.Drawing.Point)">
+            <summary>
+            When implemented by a class, finds the declaration of the symbol under a given position.
+            </summary>
+            <param name="position">Position within the text.</param>
+            <returns>Declaration symbol location.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.FindDeclarationAsync">
+            <summary>
+            When implemented by a class, finds the declaration of the symbol at the current position.
+            </summary>
+            <returns>Declaration symbol location.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.FindDeclarationAsync(System.Drawing.Point)">
+            <summary>
+            When implemented by a class, finds the declaration of the symbol under a given position.
+            </summary>
+            <param name="position">Position within the text.</param>
+            <returns>Declaration symbol location.</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.FindReferences(System.Drawing.Point,Alternet.Common.IRangeList)">
+            <summary>
+            When implemented by a class, finds all references of the symbol under a given position
+            </summary>
+            <param name="position">Position within the text</param>
+            <param name="references">List of the found references</param>
+            <returns>Number of found references</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.FindReferencesAsync(System.Drawing.Point,Alternet.Common.IRangeList)">
+            <summary>
+            When implemented by a class, finds all references of the symbol under a given position
+            </summary>
+            <param name="position">Position within the text</param>
+            <param name="references">List of the found references</param>
+            <returns>Number of found references</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.FindImplementations(System.Drawing.Point,Alternet.Common.IRangeList)">
+            <summary>
+            When implemented by a class, finds all implementations of the symbol under a given position
+            </summary>
+            <param name="position">Position within the text</param>
+            <param name="references">List of the found implementations</param>
+            <returns>Number of found implementations</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.FindImplementationsAsync(System.Drawing.Point,Alternet.Common.IRangeList)">
+            <summary>
+            When implemented by a class, finds all implementations of the symbol under a given position
+            </summary>
+            <param name="position">Position within the text</param>
+            <param name="references">List of the found references</param>
+            <returns>Number of found implementations</returns>
+        </member>
+        <member name="M:Alternet.Editor.Common.Wpf.IScriptEdit.JumpToDeclaration">
+            <summary>
+            When implemented by a class, finds the declaration of the symbol under the current position and navigates to it.
+            </summary>
+        </member>
+    </members>
+</doc>

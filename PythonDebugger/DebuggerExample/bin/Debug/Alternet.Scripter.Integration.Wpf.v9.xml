@@ -1,0 +1,672 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Alternet.Scripter.Integration.Wpf.v9</name>
+    </assembly>
+    <members>
+        <member name="T:Alternet.Scripter.Integration.Wpf.DebugCodeEditContainer">
+            <summary>
+            Represents a container for editor controls that display code being debugged.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEditContainer.#ctor(System.Windows.Controls.TabControl)">
+            <summary>
+            Initializes a new instance of the <c>DebugCodeEditContainer</c> class with specified tab control.
+            </summary>
+            <param name="tabControl"><c>TabControl</c> that contains pages with <c>IDebugEdit</c> controls.</param>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.DebugCodeEditContainer.EditorRequested">
+            <summary>
+            Occurs when users try to obtain an edit control that contains specific source code.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.DebugCodeEditContainer.CommandExecuted">
+            <summary>
+            Occurs when one of the debugger-related commands, like find references or goto definition, is executed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebugCodeEditContainer.Editors">
+            <summary>
+            Gets a list of <c>IDebugEdit</c> controls currently opened in this container.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebugCodeEditContainer.Debugger">
+            <summary>
+            Gets or sets a <c>IScriptDebuggerBase</c> linked to this control.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebugCodeEditContainer.ActiveEditor">
+            <summary>
+            Gets a currently active <c>IDebugEdit</c> control.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEditContainer.TryActivateEditor(System.String)">
+            <summary>
+            Tries to activate specific <c>IDebugEdit</c>.
+            </summary>
+            <param name="fileName">Specifies editor to be activated.</param>
+            <returns><c>IDebugEdit</c> that is activated if successful; otherwise, null.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEditContainer.TryGetEditorByFileName(System.String)">
+            <summary>
+            Tries to open <c>IDebugEdit</c> with source code from the specified file.
+            </summary>
+            <param name="fileName">File name to open.</param>
+            <returns><c>IDebugEdit</c> that is opened if successful; otherwise, null.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEditContainer.CloseFile(System.String)">
+            <summary>
+            Closes editor containing given file.
+            </summary>
+            <param name="fileName">Specifies editor to be closed.</param>
+        </member>
+        <member name="T:Alternet.Scripter.Integration.Wpf.DebugEditCommand">
+            <summary>
+            Defines a debugger-related editor commands.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebugEditCommand.FindReferences">
+            <summary>
+            Specifies find symbol references command.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebugEditCommand.FindImplementations">
+            <summary>
+            Specifies find symbol implementations command.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebugEditCommand.GotoDefinition">
+            <summary>
+            Specifies go to symbol definition command.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Integration.Wpf.DebugEditCommandExecutedEventArgs">
+            <summary>
+            Provides data for the <c>CommandExecuted</c> event handler.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugEditCommandExecutedEventArgs.#ctor(Alternet.Scripter.Integration.Wpf.IDebugEdit,Alternet.Scripter.Integration.Wpf.DebugEditCommand)">
+            <summary>
+            Initializes a new instance of the <c>DebugEditCommandExecutedEventArgs</c> class with specified parameters.
+            </summary>
+            <param name="editor"><c>IDebugEdit</c> used to execute action.</param>
+            <param name="command">Command to be executed.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebugEditCommandExecutedEventArgs.DebugEdit">
+            <summary>
+            Gets or sets <c>IDebugEdit</c> control used to execute action.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebugEditCommandExecutedEventArgs.Command">
+            <summary>
+            Gets or sets command to be executed
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl">
+            <summary>
+            Represents a container of the debugger-related panels, like <c>Output</c> or <c>Errors</c>.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.#ctor">
+            <summary>
+            Initializes a new instance of the <c>DebuggerPanelsTabControl</c> class with default settings.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.ActivePanelsChanged">
+            <summary>
+            Occurs when an active debugger panel is changed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.VisiblePanels">
+            <summary>
+            Gets or sets a list of panels that are displayed in this control.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.Debugger">
+            <summary>
+            Gets or sets <c>IScriptDebuggerBase</c>, which messages, errors, and breakpoints will be displayed by this control.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.Output">
+            <summary>
+            Gets a debugger panel used to display output debugger messages.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.Errors">
+            <summary>
+            Gets a debugger panel used to display compiler errors and warnings.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.FindResults">
+            <summary>
+            Gets a debugger panel used to display search results.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.Threads">
+            <summary>
+            Gets a debugger panel used to display active threads.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.Watches">
+            <summary>
+            Gets a debugger panel used to display watch expressions.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.Locals">
+            <summary>
+            Gets a debugger panel used to display local variables.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.CallStack">
+            <summary>
+            Gets a debugger panel used to display call stack frames.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.Breakpoints">
+            <summary>
+            Gets a debugger panel used to display breakpoints.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.IsPanelActive(Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds)">
+            <summary>
+            Indicates whether some panel is active.
+            </summary>
+            <param name="panel">A kind of panel to check.</param>
+            <returns>True if specified panel is active; otherwise, false.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebuggerPanelsTabControl.FocusPanel(Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds)">
+            <summary>
+            Activates specified panel.
+            </summary>
+            <param name="panelKind">A kind of panel to activate.</param>
+        </member>
+        <member name="T:Alternet.Scripter.Integration.Wpf.DebuggerUIController">
+            <summary>
+            Represents an UI control used to handle a list of <c>IDebugEdit</c> controls.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebuggerUIController.#ctor(System.Windows.Threading.Dispatcher,Alternet.Scripter.Integration.Wpf.IDebugEditContainer)">
+            <summary>
+            Initializes a new instance of the <c>DebuggerUIController</c> class with specified parameters.
+            </summary>
+            <param name="dispatcher">The Dispatcher this instance associated with.</param>
+            <param name="editorContainer">Control contains a list of <c>IDebugEdit</c> controls.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerUIController.Debugger">
+            <summary>
+            Gets or sets a <c>IScriptDebuggerBase</c> linked to this control.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerUIController.DefaultCommands">
+            <summary>
+            Gets a list of the debugger commands linked to this control.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerUIController.DebuggerPanels">
+            <summary>
+            Gets or sets a container of the debugger panels.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebuggerUIController.CommandsListener">
+            <summary>
+            Gets or sets a control that provides custom processing of the debugger commands.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebuggerUIController.UpdateBreakpoints">
+            <summary>
+            Updates its breakpoint content (line styles) from the debugger's breakpoint collection.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Integration.Wpf.DebugCodeEdit">
+            <summary>
+            Represents advanced multi-line text edit control that implements <c>IDebugEdit</c> interface.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.#ctor">
+            <summary>
+            Initializes a new instance of the <c>DebugCodeEdit</c> class with default settings.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.BreakpointToggle">
+            <summary>
+            Occurs when a given breakpoint is toggled on/off.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.SetNextStatement">
+            <summary>
+            Occurs when the execution position moves to a different line of code.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.GotoDefinition">
+            <summary>
+            Occurs when a user executes Goto Definition command.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.FindAllReferences">
+            <summary>
+            Occurs when a user executes Find All References command.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.FindAllImplementations">
+            <summary>
+            Occurs when a user executes Find All Implementations command.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.AddToWatchClick">
+            <summary>
+            Occurs when a user clicks on the local to add it to the watch window.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.DataTipsEnabled">
+            <summary>
+            Gets or sets a boolean value indicating whether DataTip functionality is enabled.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.SingleEditorDebuggingUI">
+            <summary>
+            Gets or sets a boolean value indicating whether single-file script debugging mode is enabled.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.Debugger">
+            <summary>
+            Gets or sets a <c>IScriptDebuggerBase</c> linked to this control.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.AllowedActions">
+            <summary>
+            Gets or sets a allowed actions.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.ExecutionStopped(Alternet.Scripter.Debugger.ExecutionPosition)">
+            <summary>
+            Updates line styles when debugging is paused.
+            </summary>
+            <param name="executionPos">Current execution line number and a file name.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.MakeVisible(System.Drawing.Point,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.SwitchStackFrame(Alternet.Scripter.Debugger.StackFrame,Alternet.Scripter.Debugger.ExecutionPosition)">
+            <summary>
+            Updates line styles when the debugger switches to the stack frame.
+            </summary>
+            <param name="stackFrame"><c>StackFrame</c> to be switched to.</param>
+            <param name="executionPos">Current execution line number and a file name.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.ClearStackFrame(Alternet.Scripter.Debugger.StackFrame)">
+            <summary>
+            Removes visual styles related to the step-by-step execution at specified position.
+            </summary>
+            <param name="stackFrame">StackFrame representing position to be cleared.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.ClearDebugStyles(Alternet.Scripter.Debugger.ExecutionPosition)">
+            <summary>
+            Removes visual styles related to the step-by-step execution at specified position.
+            </summary>
+            <param name="executionPos">Current execution line number and a file name.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.BreakpointStateChanged(Alternet.Scripter.Debugger.Breakpoint)">
+            <summary>
+            Updates line styles when given breakpoint state changes.
+            </summary>
+            <param name="breakpoint"><c>Breakpoint</c> which state was changed.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.BreakpointDeleted(Alternet.Scripter.Debugger.Breakpoint)">
+            <summary>
+            Updates line styles when given breakpoint is deleted.
+            </summary>
+            <param name="breakpoint"><c>Breakpoint</c> to be deleted.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.UpdateBreakpoints">
+            <summary>
+            Updates its breakpoint content (line styles) from the debugger's breakpoint collection.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.Localize">
+            <summary>
+            Localizes string resources.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.JumpToDeclaration">
+            <inheritdoc/>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugCodeEdit.ApplyTheme(Alternet.Editor.Wpf.IVisualTheme)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Alternet.Scripter.Integration.Wpf.ThemedDataPainter">
+            <summary>
+            Encapsulates a theme-related drawing surface, providing properties and methods used to draw DataTip.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.ThemedDataPainter.#ctor(Alternet.Editor.Wpf.IVisualTheme)">
+            <summary>
+            Initializes a new instance of the <c>ThemedDataPainter</c> class with specified theme.
+            </summary>
+            <param name="theme">A visual theme used to define painter colors.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.ThemedDataPainter.ImagesResourceNameSuffix">
+            <summary>
+            Gets or sets a suffix used to locate image resources depending on the theme type.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Integration.Wpf.DebugEditRequestedEventArgs">
+            <summary>
+            Provides data for the <c>EditorRequested</c> event handler.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.DebugEditRequestedEventArgs.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <c>DebugEditRequestedEventArgs</c> class with specified file name.
+            </summary>
+            <param name="fileName">Specifies editor to be opened.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebugEditRequestedEventArgs.FileName">
+            <summary>
+            Gets the file name that specifies editor to be activated.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.DebugEditRequestedEventArgs.DebugEdit">
+            <summary>
+            Gets an editor that implements <c>IDebugEdit</c> interface.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds">
+            <summary>
+            Defines the kind of debugger panels.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds.None">
+            <summary>
+            Specifies no panel.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds.Breakpoints">
+            <summary>
+            Specifies panel used to display breakpoints.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds.CallStack">
+            <summary>
+            Specifies panel used to display call stack frames.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds.Locals">
+            <summary>
+            Specifies panel used to display local variables.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds.Watches">
+            <summary>
+            Specifies panel used to display watch expressions.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds.Threads">
+            <summary>
+            Specifies panel used to display active threads.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds.Errors">
+            <summary>
+            Specifies panel used to display compiler errors and warnings.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds.Output">
+            <summary>
+            Specifies panel used to display output debugger messages.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds.FindResults">
+            <summary>
+            Specifies panel used to display search results.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds.All">
+            <summary>
+            Specifies all possible panels.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Integration.Wpf.IDebuggerPanels">
+            <summary>
+            Represents properties and methods used to display and manage debugger-related panels, like <c>Output</c> or <c>Errors</c>.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.IDebuggerPanels.ActivePanelsChanged">
+            <summary>
+            When implemented by a class, occurs when an active debugger panel is changed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebuggerPanels.Output">
+            <summary>
+            When implemented by a class, gets a debugger panel used to display output debugger messages.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebuggerPanels.Errors">
+            <summary>
+            When implemented by a class, gets a debugger panel used to display compiler errors and warnings.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebuggerPanels.FindResults">
+            <summary>
+            When implemented by a class, gets a debugger panel used to display search results.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebuggerPanels.Threads">
+            <summary>
+            When implemented by a class, gets a debugger panel used to display active threads.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebuggerPanels.Watches">
+            <summary>
+            When implemented by a class, gets a debugger panel used to display watch expressions.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebuggerPanels.Locals">
+            <summary>
+            When implemented by a class, gets a debugger panel used to display local variables.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebuggerPanels.CallStack">
+            <summary>
+            When implemented by a class, gets a debugger panel used to display call stack frames.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebuggerPanels.Breakpoints">
+            <summary>
+            When implemented by a class, gets a debugger panel used to display breakpoints.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebuggerPanels.IsPanelActive(Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds)">
+            <summary>
+            When implemented by a class, indicates whether some panel is active.
+            </summary>
+            <param name="panel">A kind of panel to check.</param>
+            <returns>True if specified panel is active; otherwise, false.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebuggerPanels.FocusPanel(Alternet.Scripter.Integration.Wpf.DebuggerPanelKinds)">
+            <summary>
+            When implemented by a class, activates specified panel.
+            </summary>
+            <param name="panel">A kind of panel to activate.</param>
+        </member>
+        <member name="T:Alternet.Scripter.Integration.Wpf.IDebugEditContainer">
+            <summary>
+            Represents properties and methods used to manage (open, close, activate) with a list of editor controls.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.IDebugEditContainer.EditorRequested">
+            <summary>
+            When implemented by a class, occurs when users try to obtain an edit control that contains specific source code.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.IDebugEditContainer.CommandExecuted">
+            <summary>
+            When implemented by a class, occurs when one of the debugger-related commands, like find references or goto definition, is executed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebugEditContainer.Editors">
+            <summary>
+            When implemented by a class, gets a list of <c>IDebugEdit</c> controls currently opened in this container.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebugEditContainer.ActiveEditor">
+            <summary>
+            When implemented by a class, gets a currently active <c>IDebugEdit</c> control.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebugEditContainer.Debugger">
+            <summary>
+            When implemented by a class, gets or sets a <c>IScriptDebuggerBase</c> linked to this control.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebugEditContainer.TryGetEditorByFileName(System.String)">
+            <summary>
+            When implemented by a class, tries to open <c>IDebugEdit</c> with source code from the specified file.
+            </summary>
+            <param name="fileName">File name to open.</param>
+            <returns><c>IDebugEdit</c> that is opened if successful; otherwise, null.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebugEditContainer.TryActivateEditor(System.String)">
+            <summary>
+            When implemented by a class, tries to activate specific <c>IDebugEdit</c>.
+            </summary>
+            <param name="fileName">Specifies editor to be activated.</param>
+            <returns><c>IDebugEdit</c> that is activated if successful; otherwise, null.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebugEditContainer.CloseFile(System.String)">
+            <summary>
+            When implemented by a class, closes edito containing given file.
+            </summary>
+            <param name="fileName">Specifies editor to be closed.</param>
+        </member>
+        <member name="T:Alternet.Scripter.Integration.Wpf.AllowedActions">
+            <summary>
+            Represents menu actions allowed by the editor.
+            </summary>
+            <summary>
+            Represents menu actions allowed by the editor.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.AllowedActions.None">
+            <summary>
+            Specifies no action.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.AllowedActions.BreakpointToggle">
+            <summary>
+            Specifies breakpoint toggle (add or remove) action.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.AllowedActions.SetNextStatement">
+            <summary>
+            Specifies set next statement (change the instruction pointer to a different place in the program) action.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.AllowedActions.GotoDefinition">
+            <summary>
+            Specifies go to symbol definition action.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.AllowedActions.FindAllReferences">
+            <summary>
+            Specifies find all symbol references action.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Integration.Wpf.AllowedActions.FindAllImplementations">
+            <summary>
+            Specifies find all symbol implementations action.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Integration.Wpf.IDebugEdit">
+            <summary>
+            Represents a text box with extended features for script debugging of the source code.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.IDebugEdit.BreakpointToggle">
+            <summary>
+            When implemented by a class, occurs when a given breakpoint is toggled on/off.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.IDebugEdit.SetNextStatement">
+            <summary>
+            When implemented by a class, occurs when the execution position moves to a different line of code.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.IDebugEdit.GotoDefinition">
+            <summary>
+            When implemented by a class, occurs when a user executes Goto Definition command.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.IDebugEdit.FindAllReferences">
+            <summary>
+            When implemented by a class, occurs when a user executes Find All References command.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.IDebugEdit.FindAllImplementations">
+            <summary>
+            When implemented by a class, occurs when a user executes Find All Implementations command.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Integration.Wpf.IDebugEdit.AddToWatchClick">
+            <summary>
+            When implemented by a class, occurs when a user executes Find All Implementations command.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebugEdit.Debugger">
+            <summary>
+            When implemented by a class, gets or sets a <c>IScriptDebugger</c> linked to this control.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Integration.Wpf.IDebugEdit.AllowedActions">
+            <summary>
+            When implemented by a class, gets or sets allowed actions.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebugEdit.ExecutionStopped(Alternet.Scripter.Debugger.ExecutionPosition)">
+            <summary>
+            When implemented by a class, updates line styles when debugging is paused.
+            </summary>
+            <param name="executionPos">Current execution line number and a file name.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebugEdit.ClearDebugStyles(Alternet.Scripter.Debugger.ExecutionPosition)">
+            <summary>
+            When implemented by a class, removes visual styles related to the step-by-step execution at specified position.
+            </summary>
+            <param name="executionPos">Current execution line number and a file name.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebugEdit.ClearStackFrame(Alternet.Scripter.Debugger.StackFrame)">
+            <summary>
+            When implemented by a class, removes visual styles related to the step-by-step execution at specified position.
+            </summary>
+            <param name="stackFrame">StackFrame representing position to be cleared.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebugEdit.SwitchStackFrame(Alternet.Scripter.Debugger.StackFrame,Alternet.Scripter.Debugger.ExecutionPosition)">
+            <summary>
+            When implemented by a class, updates line styles when the debugger switches to the stack frame.
+            </summary>
+            <param name="stackFrame"><c>StackFrame</c> to be switched to.</param>
+            <param name="executionPos">Current execution line number and a file name.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebugEdit.BreakpointStateChanged(Alternet.Scripter.Debugger.Breakpoint)">
+            <summary>
+            When implemented by a class, updates line styles when given breakpoint state changes.
+            </summary>
+            <param name="breakpoint"><c>Breakpoint</c> which state was changed.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebugEdit.BreakpointDeleted(Alternet.Scripter.Debugger.Breakpoint)">
+            <summary>
+            When implemented by a class, updates line styles when given breakpoint is deleted.
+            </summary>
+            <param name="breakpoint"><c>Breakpoint</c> to be deleted.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebugEdit.UpdateBreakpoints">
+            <summary>
+            When implemented by a class, updates its breakpoint content (line styles) from the debugger's breakpoint collection.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Integration.Wpf.IDebugEdit.Localize">
+            <summary>
+            When implemented by a class, localizes string resources.
+            </summary>
+        </member>
+    </members>
+</doc>

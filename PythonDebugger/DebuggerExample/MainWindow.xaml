@@ -1,0 +1,43 @@
+﻿<Window x:Class="DebuggerExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:alternet="http://schemas.alternetsoft.com/editor/wpf"
+        xmlns:ai="clr-namespace:Alternet.Scripter.Integration.Wpf;assembly=Alternet.Scripter.Integration.Wpf.v9"
+        xmlns:local="clr-namespace:DebuggerExample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Margin" Value="0,5,5,5"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel Margin="10">
+        <!--Toolbar-->
+        <DockPanel DockPanel.Dock="Top">
+            <Button DockPanel.Dock="Left" Name="btnRun" Content="Run/Continue" Click="btnRun_Click" Width="100"/>
+            <Button DockPanel.Dock="Left" Name="btnStop" Content="Stop" Click="btnStop_Click"/>
+            <Button DockPanel.Dock="Left" Name="btnStepInto" Content="StepInto" Click="btnStepInto_Click"/>
+            <Button DockPanel.Dock="Left" Name="btnStepOver" Content="StepOver" Click="btnStepOver_Click"/>
+            <Button DockPanel.Dock="Left" Name="btnStepOut" Content="StepOut" Click="btnStepOut_Click"/>
+            <TextBlock/>
+        </DockPanel>
+
+        <!--DebugCodeEdit-->
+        <ai:DebugCodeEdit Grid.Row="0" Name="debugEditor" FontFamily="Consolas" FontSize="10pt" 
+                          BorderThickness="0" BorderBrush="Transparent"
+                          AllowOutlining="True" LineNumbersVisible="True" LineModificatorsVisible="True"
+                          AllowHorizontalEditorSplit="False" AllowVerticalEditorSplit="False"
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+    </DockPanel>
+    
+</Window>
