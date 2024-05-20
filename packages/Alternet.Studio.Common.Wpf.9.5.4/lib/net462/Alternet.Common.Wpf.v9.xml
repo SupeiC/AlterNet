@@ -1,0 +1,391 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Alternet.Common.Wpf.v9</name>
+    </assembly>
+    <members>
+        <member name="T:Alternet.Common.Wpf.ProgressDialog">
+            <summary>
+            Interaction logic for ProgressDialog.xaml
+            </summary>
+            <summary>
+            ProgressDialog
+            </summary>
+        </member>
+        <member name="M:Alternet.Common.Wpf.ProgressDialog.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Alternet.Common.Wpf.GraphicsUtilities">
+            <summary>
+            Represents support methods to calculate dimensions.
+            </summary>
+        </member>
+        <member name="F:Alternet.Common.Wpf.GraphicsUtilities.Epsilon">
+            <summary>
+            Determines distance between close values.
+            </summary>
+        </member>
+        <member name="M:Alternet.Common.Wpf.GraphicsUtilities.AreSizesClose(System.Windows.Size,System.Windows.Size)">
+            <summary>
+            Indicates whether specified parameters is close to each other.
+            </summary>
+            <param name="d1">First value to process.</param>
+            <param name="d2">Second value to process.</param>
+            <returns>true if difference between <c>Size.Width</c> and <c>Size.Height</c> of specified parameters less then <c>Epsilon</c>; otherwise false.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.GraphicsUtilities.AreDoublesClose(System.Double,System.Double)">
+            <summary>
+            Indicates whether specified parameters is close to each other.
+            </summary>
+            <param name="d1">First value to process.</param>
+            <param name="d2">Second value to process.</param>
+            <returns>true if difference between specified parameters less then <c>Epsilon</c>; otherwise false.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.GraphicsUtilities.AreVectorsClose(System.Windows.Vector,System.Windows.Vector)">
+            <summary>
+            Indicates whether specified parameters is close to each other.
+            </summary>
+            <param name="d1">First value to process.</param>
+            <param name="d2">Second value to process.</param>
+            <returns>true if difference between <c>Vector.X</c> and <c>Vector.Y</c> of specified parameters less then <c>Epsilon</c>; otherwise false.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.GraphicsUtilities.GetPixelSize(System.Windows.Media.Visual)">
+            <summary>
+            Specifies size of given visual.
+            </summary>
+            <param name="visual">Specifies <c>System.Windows.Media.Visual</c> to process.</param>
+            <returns>Specifies <c>System.Windows.Size</c> of given visual; throws an exception if visual is null.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.GraphicsUtilities.Round(System.Windows.Point,System.Windows.Size)">
+            <summary>
+            Rounds given point.
+            </summary>
+            <param name="point">Specifies <c>System.Windows.Point</c> to round.</param>
+            <param name="pixelSize">Specifies <c>System.Windows.Size</c> on which divided given point.</param>
+            <returns>Rounded <c>System.Windows.Point</c> after division by pixelSize.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.GraphicsUtilities.Round(System.Windows.Rect,System.Windows.Size)">
+            <summary>
+            Rounds given rectangle.
+            </summary>
+            <param name="rect">Specifies <c>System.Windows.Rect</c> to round.</param>
+            <param name="pixelSize">Specifies <c>System.Windows.Size</c> on which divided given rect.</param>
+            <returns>Rounded <c>System.Windows.Rect</c> after division by pixelSize.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.GraphicsUtilities.Round(System.Double,System.Double)">
+            <summary>
+            Rounds given value.
+            </summary>
+            <param name="value">Specifies a double value to round.</param>
+            <param name="pixelSize">Specifies <c>System.Windows.Size</c> on which divided given value.</param>
+            <returns>Rounded value after division by pixelSize.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.KeyboardUtility.SendKey(System.Windows.Input.Key)">
+            <summary>
+              Sends the specified key.
+            </summary>
+            <param name="key">The key.</param>
+        </member>
+        <member name="M:Alternet.Common.Wpf.KeyboardUtility.GetCharFromKey(System.Windows.Input.Key)">
+            <summary>
+            Converts specified Key into Char.
+            </summary>
+            <param name="key">Key to convert.</param>
+            <returns>Char as result of convertation.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.KeyboardUtility.IsCharKey(System.Windows.Input.Key)">
+            <summary>
+            Determines if key is a character key.
+            </summary>
+            <param name="key">True if key represents keyboard character;otherwise false.</param>
+        </member>
+        <member name="M:Alternet.Common.Wpf.KeyboardUtility.IsNavigationOrSystemKey(System.Windows.Input.Key)">
+            <summary>
+            Determines if key is a navigation or system key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Alternet.Common.Wpf.PropertyChangeNotifier.ValueProperty">
+            <summary>
+            Identifies the <see cref="P:Alternet.Common.Wpf.PropertyChangeNotifier.Value"/> dependency property
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Wpf.PropertyChangeNotifier.Value">
+            <summary>
+            Returns/sets the value of the property
+            </summary>
+            <seealso cref="F:Alternet.Common.Wpf.PropertyChangeNotifier.ValueProperty"/>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.WithX(System.Windows.Rect,System.Double)">
+            <summary>
+            Moves the location of given rectangle to the specified x-coordinate.
+            </summary>
+            <param name="rectangle">Rect to process.</param>
+            <param name="x">New rectangle X position.</param>
+            <returns>Rect object with new location.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.WithY(System.Windows.Rect,System.Double)">
+            <summary>
+            Moves the location of given rectangle to the specified y-coordinate.
+            </summary>
+            <param name="rectangle">Rect to process.</param>
+            <param name="y">New rectangle Y position.</param>
+            <returns>Rect object with new location.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.WithOffset(System.Windows.Rect,System.Double,System.Double)">
+            <summary>
+            Offsets the location of given rectangle by the specified offset.
+            </summary>
+            <param name="rectangle">Rect to process.</param>
+            <param name="offsetX">Horizontal offset.</param>
+            <param name="offsetY">Vertical offset.</param>
+            <returns>Rect object with new location.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.WithOffset(System.Windows.Rect,System.Windows.Size)">
+            <summary>
+            Offsets the location of given rectangle by the specified offset.
+            </summary>
+            <param name="rectangle">Rect to process.</param>
+            <param name="offset">Horizontal and vertical offset.</param>
+            <returns>Rect object with new location.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.WithWidth(System.Windows.Rect,System.Double)">
+            <summary>
+            Adjusts a given rectangle with the new width.
+            </summary>
+            <param name="rectangle">Rect to process.</param>
+            <param name="width">New rectangle width.</param>
+            <returns>Rect object with new width.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.WithHeight(System.Windows.Rect,System.Double)">
+            <summary>
+            Adjusts a given rectangle with the new height.
+            </summary>
+            <param name="rectangle">Rect to process.</param>
+            <param name="height">New rectangle height.</param>
+            <returns>Rect object with new height.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.WithSize(System.Windows.Rect,System.Windows.Size)">
+            <summary>
+            Adjusts a given rectangle with the new size.
+            </summary>
+            <param name="rectangle">Rect to process.</param>
+            <param name="size">New rectangle size.</param>
+            <returns>Rect object with new size.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.WithLocation(System.Windows.Rect,System.Windows.Point)">
+            <summary>
+            Moves the location of given rectangle to the specified coordinates.
+            </summary>
+            <param name="rectangle">Rect to process.</param>
+            <param name="location">New rectangle location.</param>
+            <returns>Rect object with new location.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.LeftTop(System.Windows.Rect)">
+            <summary>
+            Returns location of the upper-left corner of specified rectangle.
+            </summary>
+            <param name="r">Given rectangle.</param>
+            <returns>Point that contains location of the upper-left rectangle corner.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.RightTop(System.Windows.Rect)">
+            <summary>
+            Returns location of the upper-right corner of specified rectangle.
+            </summary>
+            <param name="r">Given rectangle.</param>
+            <returns>Point that contains location of the upper-right rectangle corner.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.RightBottom(System.Windows.Rect)">
+            <summary>
+            Returns location of the bottom-right corner of specified rectangle.
+            </summary>
+            <param name="r">Given rectangle.</param>
+            <returns>Point that contains location of the bottom-right rectangle corner.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.LeftBottom(System.Windows.Rect)">
+            <summary>
+            Returns location of the bottom-left corner of specified rectangle.
+            </summary>
+            <param name="r">Given rectangle.</param>
+            <returns>Point that contains location of the bottom-left rectangle corner.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.Inflated(System.Windows.Rect,System.Windows.Size)">
+            <summary>
+            Inflates given rectangle by the specified size.
+            </summary>
+            <param name="rectangle">Given rectangle.</param>
+            <param name="size">The amount to inflate this rectangle.</param>
+            <returns>Rect object with new size.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.DeflatedWithPadding(System.Windows.Rect,System.Windows.Thickness)">
+            <summary>
+            Deflates given rectangle by the specified padding.
+            </summary>
+            <param name="r">Given rectangle.</param>
+            <param name="p">Thickness specifying amount to decrease this rectangle.</param>
+            <returns>Rect object with new size.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.InflatedWithPadding(System.Windows.Rect,System.Windows.Thickness)">
+            <summary>
+            Inflates given rectangle by the specified padding.
+            </summary>
+            <param name="r">Given rectangle.</param>
+            <param name="p">Thickness specifying amount to increase this rectangle.</param>
+            <returns>Rect object with new size.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.RectExtensions.Inflated(System.Windows.Rect,System.Double)">
+            <summary>
+            Inflates given rectangle by the specified amount.
+            </summary>
+            <param name="rectangle">Given rectangle.</param>
+            <param name="amount">The amount to inflate this rectangle in vertical and horizontal direction.</param>
+            <returns>Rect object with new size.</returns>
+        </member>
+        <member name="T:Alternet.Common.Wpf.SystemDialogs.Interop.IMalloc">
+            <summary>
+            C# definition of the IMalloc interface.
+            </summary>
+        </member>
+        <member name="M:Alternet.Common.Wpf.SystemDialogs.Interop.IMalloc.Alloc(System.UInt32)">
+            <summary>
+            Allocate a block of memory
+            </summary>
+            <param name="cb">Size, in bytes, of the memory block to be allocated.</param>
+            <returns>a pointer to the allocated memory block.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.SystemDialogs.Interop.IMalloc.Realloc(System.IntPtr,System.UInt32)">
+            <summary>
+            Changes the size of a previously allocated memory block.
+            </summary>
+            <param name="pv">Pointer to the memory block to be reallocated</param>
+            <param name="cb">Size of the memory block, in bytes, to be reallocated.</param>
+            <returns>reallocated memory block</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.SystemDialogs.Interop.IMalloc.Free(System.IntPtr)">
+            <summary>
+            Free a previously allocated block of memory.
+            </summary>
+            <param name="pv">Pointer to the memory block to be freed.</param>
+        </member>
+        <member name="M:Alternet.Common.Wpf.SystemDialogs.Interop.IMalloc.GetSize(System.IntPtr)">
+            <summary>
+            This method returns the size, in bytes, of a memory block previously allocated with IMalloc::Alloc or IMalloc::Realloc.
+            </summary>
+            <param name="pv">Pointer to the memory block for which the size is requested</param>
+            <returns>The size of the allocated memory block in bytes.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.SystemDialogs.Interop.IMalloc.DidAlloc(System.IntPtr)">
+            <summary>
+            This method determines whether this allocator was used to allocate the specified block of memory.
+            </summary>
+            <param name="pv">Pointer to the memory block</param>
+            <returns>
+            1 - allocated
+            0 - not allocated by this IMalloc Instance.
+            -1 if DidAlloc is unable to determine whether or not it allocated the memory block.
+            </returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.SystemDialogs.Interop.IMalloc.HeapMinimize">
+            <summary>
+            Minimizes the heap by releasing unused memory to the operating system.
+            </summary>
+        </member>
+        <member name="T:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog">
+            <summary>
+            Prompts the user to select a folder.
+            </summary>
+            <remarks>
+            This class will use the Vista style Select Folder dialog if possible, or the regular FolderBrowserDialog
+            if it is not. Note that the Vista style dialog is very different, so using this class without testing
+            in both Vista and older Windows versions is not recommended.
+            </remarks>
+            <threadsafety instance="false" static="true" />
+        </member>
+        <member name="M:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog" /> class.
+            </summary>
+        </member>
+        <member name="P:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog.IsVistaFolderDialogSupported">
+            <summary>
+            Gets a value that indicates whether the current OS supports Vista-style common file dialogs.
+            </summary>
+            <value>
+            <see langword="true" /> on Windows Vista or newer operating systems; otherwise, <see langword="false" />.
+            </value>
+        </member>
+        <member name="P:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog.Description">
+            <summary>
+            Gets or sets the descriptive text displayed above the tree view control in the dialog box, or below the list view control
+            in the Vista style dialog.
+            </summary>
+            <value>
+            The description to display. The default is an empty string ("").
+            </value>
+        </member>
+        <member name="P:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog.RootFolder">
+            <summary>
+            Gets or sets the root folder where the browsing starts from. This property has no effect if the Vista style
+            dialog is used.
+            </summary>
+            <value>
+            One of the <see cref="T:System.Environment.SpecialFolder" /> values. The default is Desktop.
+            </value>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">The value assigned is not one of the <see cref="T:System.Environment.SpecialFolder" /> values.</exception>
+        </member>
+        <member name="P:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog.SelectedPath">
+            <summary>
+            Gets or sets the path selected by the user.
+            </summary>
+            <value>
+            The path of the folder first selected in the dialog box or the last folder selected by the user. The default is an empty string ("").
+            </value>
+        </member>
+        <member name="P:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog.ShowNewFolderButton">
+            <summary>
+            Gets or sets a value indicating whether the New Folder button appears in the folder browser dialog box. This
+            property has no effect if the Vista style dialog is used; in that case, the New Folder button is always shown.
+            </summary>
+            <value>
+            <see langword="true" /> if the New Folder button is shown in the dialog box; otherwise, <see langword="false" />. The default is <see langword="true" />.
+            </value>
+        </member>
+        <member name="P:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog.UseDescriptionForTitle">
+            <summary>
+            Gets or sets a value that indicates whether to use the value of the <see cref="P:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog.Description" /> property
+            as the dialog title for Vista style dialogs. This property has no effect on old style dialogs.
+            </summary>
+            <value><see langword="true" /> to indicate that the value of the <see cref="P:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog.Description" /> property is used as dialog title; <see langword="false" />
+            to indicate the value is added as additional text to the dialog. The default is <see langword="false" />.</value>
+        </member>
+        <member name="M:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog.Reset">
+            <summary>
+            Resets all properties to their default values.
+            </summary>
+        </member>
+        <member name="M:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog.ShowDialog">
+            <summary>
+            Displays the folder browser dialog.
+            </summary>
+            <returns>If the user clicks the OK button, <see langword="true" /> is returned; otherwise, <see langword="false" />.</returns>
+        </member>
+        <member name="M:Alternet.Common.Wpf.SystemDialogs.VistaFolderBrowserDialog.ShowDialog(System.Windows.Window)">
+            <summary>
+            Displays the folder browser dialog.
+            </summary>
+            <param name="owner">Handle to the window that owns the dialog.</param>
+            <returns>If the user clicks the OK button, <see langword="true" /> is returned; otherwise, <see langword="false" />.</returns>
+        </member>
+        <member name="T:Alternet.Common.Wpf.SystemMenuDropAlignmentFixer">
+            <summary>
+            The way menus are opened depends on the SystemParameters.MenuDropAlignment property. This is usually set to align to the right if you have a tablet computer configured for right-handed people.
+            The setting can be changed for the computer in Control Panel -> Tablet PC Settings -> Specify which hand you write with.
+            If you don't have Tablet PC Settings in your control panel you can try running shell:::{80F3F1D5-FECA-45F3-BC32-752C152E456E}.
+            This class fixes this setting so popups are dropped-down with a usual orientation.
+            </summary>
+        </member>
+    </members>
+</doc>
