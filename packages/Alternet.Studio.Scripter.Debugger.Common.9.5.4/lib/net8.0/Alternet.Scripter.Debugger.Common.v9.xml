@@ -1,0 +1,1673 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Alternet.Scripter.Debugger.Common.v9</name>
+    </assembly>
+    <members>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluationProvider">
+            <summary>
+            See https://docs.microsoft.com/en-us/visualstudio/debugger/format-specifiers-in-csharp
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.IParameterInfoProvider">
+            <summary>
+            Represents methods to provide data related to <c>ParameterInfo</c>.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.IParameterInfoProvider.GetFormattedParameterInfoSymbolString(Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo,System.Int32)">
+            <summary>
+            When implemented by a class, returns formatted string corresponding to the specified <c>ParameterInfo</c>.
+            </summary>
+            <param name="parameterInfo"><c>ParameterInfo</c> to be formatted.</param>
+            <param name="currentSymbolIndex">Number of current symbol in the parameter info.</param>
+            <returns>Formatted string contained evaluated expression data.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.IParameterInfoProvider.GetParameterInfo(System.String,System.Int32)">
+            <summary>
+            When implemented by a class, returns <c>ParameterInfo</c> for specified expression.
+            </summary>
+            <param name="expressionToEvaluate">Expression to evaluate.</param>
+            <param name="positionInExpression">Position inside expression.</param>
+            <returns><c>ParameterInfo</c> that describes evaluated expression.</returns>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ISymbolRecommender">
+            <summary>
+            Represents methods declaration to find suitable <c>Symbol</c> objects.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ISymbolRecommender.GetRecommendedSymbols(System.String,System.Int32,System.Boolean)">
+            <summary>
+            When implemented by a class, gets a List of <c>Symbol</c> objects suitable to specified parameters.
+            </summary>
+            <param name="expressionToEvaluate">Expression to evaluate.</param>
+            <param name="positionInExpression">Position inside expression to find out proper symbols.</param>
+            <param name="excludeKeywords">Indicates whether reserved words should be exclude from the evaluation.</param>
+            <returns>List of symbols belongs to the specified position within expression to evaluate.</returns>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.KeyConfiguration">
+            <summary>
+            Represents a key configuration for code completion and expression evaluation.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.KeyConfiguration.CompletionKeys">
+            <summary>
+            Gets a List of Code Completion key characters.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.KeyConfiguration.CodeCompletionKeys">
+            <summary>
+            Gets a List of Code Completion key characters.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.KeyConfiguration.ExpressionSeparators">
+            <summary>
+            Gets an array of characters used as separator within expression.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.KeyConfiguration.ExcludeKeywordsCodeCompletionKeys">
+            <summary>
+            Gets a List of characters used to exclude some keywords from code completion.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.KeyConfiguration.PrioritizeCaseSensitiveMatch">
+            <summary>
+            Defines if input string is case-sensitive
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo">
+            <summary>
+            Represents properties and methods used to describe evaluated data.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.#ctor(System.Collections.Generic.IReadOnlyList{Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol},System.Int32)">
+            <summary>
+            Initializes a new instance of the <c>ParameterInfo</c> class with specified parameters.
+            </summary>
+            <param name="symbols">List of <c>ISymbol</c> related to evaluated data.</param>
+            <param name="deducedCurrentSymbolIndex">Number of current symbol.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbols">
+            <summary>
+            Represents a readonly list of <c>ISymbol</c> related to evaluated data.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.DeducedCurrentSymbolIndex">
+            <summary>
+            Represents number of current symbol.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.WithSymbols(System.Collections.Generic.IReadOnlyList{Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol})">
+            <summary>
+            Creates a new instance of this <c>ParameterInfo</c> updated to have the <c>ISymbol</c> list specified.
+            </summary>
+            <param name="symbols">List of <c>Symbol</c> to be added.</param>
+            <returns>Updated <c>ParameterInfo</c> contained additional symbols.</returns>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol">
+            <summary>
+            Represents a symbol (namespace, class, method, parameter, etc.) exposed by the evaluator.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.#ctor(System.String,System.String,System.String,System.Collections.Generic.IReadOnlyList{Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.Parameter},System.Int32)">
+            <summary>
+            Initializes a new instance of the <c>Symbol</c> class with specified parameters.
+            </summary>
+            <param name="name">Name of the symbol.</param>
+            <param name="description">Description of the symbol.</param>
+            <param name="returnType">Return type of the symbol.</param>
+            <param name="parameters">Parameter list of the symbol.</param>
+            <param name="currentParameterIndex">Current parameter index of the symbol.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.Name">
+            <summary>
+            Represents name of the symbol.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.Description">
+            <summary>
+            Represents description of the symbol.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.ReturnType">
+            <summary>
+            Represents return type of the symbol.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.Parameters">
+            <summary>
+            Represents parameter list of the symbol.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.CurrentParameterIndex">
+            <summary>
+            Represents current parameter index of the symbol.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.WithDescription(System.String)">
+            <summary>
+            Creates a new instance of this <c>Symbol</c> updated to have the description specified.
+            </summary>
+            <param name="description">Description to be added.</param>
+            <returns>Updated <c>Symbol</c> contained new description.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.WithParameters(System.Collections.Generic.IReadOnlyList{Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.Parameter})">
+            <summary>
+            Creates a new instance of this <c>Symbol</c> updated to have the parameter list specified.
+            </summary>
+            <param name="parameters">Parameter list to be added.</param>
+            <returns>Updated <c>Symbol</c> contained new parameters.</returns>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.Parameter">
+            <summary>
+            Represents a single parameter related to the evaluated <c>Symbol</c>.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.Parameter.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <c>Parameter</c> class with specified parameters.
+            </summary>
+            <param name="name">Name of the parameter.</param>
+            <param name="description">Description of the parameter.</param>
+            <param name="type">Type of the parameter.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.Parameter.Name">
+            <summary>
+            Represents name of the parameter.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.Parameter.Description">
+            <summary>
+            Represents description of the parameter.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.Parameter.Type">
+            <summary>
+            Represents type of the parameter.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.ParameterInfo.Symbol.Parameter.WithDescription(System.String)">
+            <summary>
+            Creates a new instance of this <c>Parameter</c> updated to have the description specified.
+            </summary>
+            <param name="description">Description to be added.</param>
+            <returns>Updated <c>Parameter</c> contained new description.</returns>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind">
+            <summary>
+            Specifies the possible kinds of symbols.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.Class">
+            <summary>
+            Symbol is a class.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.Method">
+            <summary>
+            Symbol is a method.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.Property">
+            <summary>
+            Symbol is a property.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.Field">
+            <summary>
+            Symbol is a field.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.Namespace">
+            <summary>
+            Symbol is a namespace.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.Constant">
+            <summary>
+            Symbol is a constant.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.Keyword">
+            <summary>
+            Symbol is a reserved word.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.Struct">
+            <summary>
+            Symbol is a structure.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.Interface">
+            <summary>
+            Symbol is an interface.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.Delegate">
+            <summary>
+            Symbol is a delegate.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.LocalOrParameter">
+            <summary>
+            Symbol is a local variable or parameter.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.Event">
+            <summary>
+            Symbol is an event.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind.GenericParameter">
+            <summary>
+            Symbol is a generic parameter.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.Symbol">
+            <summary>
+            Represents a symbol (namespace, class, method, parameter, etc.) exposed by the evaluator.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.Symbol.#ctor(Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolKind,System.String,System.Func{Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolDocumentation})">
+            <summary>
+            Initializes a new instance of the <c>Symbol</c> class with specified parameters.
+            </summary>
+            <param name="kind">Kind of the symbol.</param>
+            <param name="name">Name of the symbol.</param>
+            <param name="documentationFactory">The delegate that is invoked to produce the lazily initialized value when it is needed.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.Symbol.Kind">
+            <summary>
+            Represents kind of the symbol.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.Symbol.Name">
+            <summary>
+            Represents name of the symbol.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.Symbol.Documentation">
+            <summary>
+            Represents description of the symbol.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolDocumentation">
+            <summary>
+            Provide documentation of a single symbol.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolDocumentation.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <c>SymbolDocumentation</c> class with specified parameters.
+            </summary>
+            <param name="definition">Specifies <c>ISymbol</c> definition.</param>
+            <param name="summary">Specifies <c>ISymbol</c> summary.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolDocumentation.Definition">
+            <summary>
+            Gets definition of the <c>ISymbol</c>.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.SymbolDocumentation.Summary">
+            <summary>
+            Gets summary of the <c>ISymbol</c>.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.ErrorEvaluationResult">
+            <summary>
+            Provides data for result of unsuccessful evaluation.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.ErrorEvaluationResult.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of <c>ErrorEvaluationResult</c> with specified settings.
+            </summary>
+            <param name="expression">Evaluated expression.</param>
+            <param name="name">Name of the result.</param>
+            <param name="errorMessage">String describes error of evaluation.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.ErrorEvaluationResult.ErrorMessage">
+            <summary>
+            Represents string describes error of evaluation.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberKind">
+            <summary>
+            Specifies the possible kinds of evaluated members.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberKind.Unknown">
+            <summary>
+            Member is unknown.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberKind.Property">
+            <summary>
+            Member is a property.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberKind.Field">
+            <summary>
+            Member is a field.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberMetadata">
+            <summary>
+            Provides evaluation metadata.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberMetadata.#ctor(System.String,Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberKind,Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberVisibility,System.Boolean)">
+            <summary>
+            Initializes a new instance of <c>EvaluatedMemberMetadata</c> with specified settings.
+            </summary>
+            <param name="typeFullName">Fully qualified name of result type.</param>
+            <param name="kind">Kind of the evaluation result.</param>
+            <param name="visibility">Accessibility level of the evaluation result.</param>
+            <param name="isStatic">Indicates whether evaluation result is static.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberMetadata.TypeFullName">
+            <summary>
+            Represents fully qualified name of result type.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberMetadata.MemberKind">
+            <summary>
+            Represents kind of the evaluation result.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberMetadata.Visibility">
+            <summary>
+            Represents accessibility level of the evaluation result.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberMetadata.IsStatic">
+            <summary>
+            Represents boolean value indicating whether evaluation result is static.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberVisibility">
+            <summary>
+            Specifies the possible accessibility levels of evaluation result.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberVisibility.Unknown">
+            <summary>
+            Access level is undefined.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberVisibility.Public">
+            <summary>
+            Access is not restricted.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberVisibility.Protected">
+            <summary>
+            Access is limited to the containing class or types derived from the containing class.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberVisibility.Internal">
+            <summary>
+            Access is limited to the current assembly.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberVisibility.Private">
+            <summary>
+            Access is limited to the containing type.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluationResult">
+            <summary>
+            Provides a base class defines results of evaluation. This class is abstract.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluationResult.Expression">
+            <summary>
+            Represents evaluated expression.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluationResult.Name">
+            <summary>
+            Represents name of the result.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.GroupEvaluationResult">
+            <summary>
+            Provides data for result of group evaluation.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.GroupEvaluationResult.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of <c>GroupEvaluationResult</c> with specified settings.
+            </summary>
+            <param name="expression">Evaluated expression.</param>
+            <param name="name">Name of the result.</param>
+            <param name="description">Description of the result.</param>
+            <param name="tag">Tag of the result.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.GroupEvaluationResult.Description">
+            <summary>
+            Represents evaluation description.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.GroupEvaluationResult.Tag">
+            <summary>
+            Represents evaluation tag.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.GroupEvaluationResultTags">
+            <summary>
+            Contains default string constants related to group evaluation results.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.IExpressionEvaluator">
+            <summary>
+            Provides methods and properties that allow developers to evaluate expressions while debugging applications in the common language runtime (CLR) environment.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.IExpressionEvaluator.EvaluateExpressionAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            When implemented by a class, evaluates an expression based on the current stack frame. If the expression can be parsed but not evaluated, an object is returned but will not contain a valid value.
+            </summary>
+            <param name="expression">Expression to evaluate.</param>
+            <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+            <returns>Result of evaluation.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.IExpressionEvaluator.EvaluateCurrentExceptionAsync(System.Threading.CancellationToken)">
+            <summary>
+            When implemented by a class, evaluates current expression based on the current stack frame. If the expression can be parsed but not evaluated, an object is returned but will not contain a valid value.
+            </summary>
+            <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+            <returns>Result of evaluation.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.IExpressionEvaluator.EvaluateChildrenAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            When implemented by a class, evaluates all children for specified expression.
+            </summary>
+            <param name="expression">Expression which children should be evaluated.</param>
+            <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+            <returns>Result of evaluation.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.IExpressionEvaluator.GetCodeCompletionService(Alternet.Scripter.Debugger.ExecutionPosition,Alternet.Scripter.Debugger.ExpressionEvaluation.CodeCompletion.KeyConfiguration)">
+            <summary>
+            When implemented by a class, gets <c>ICodeCompletionService</c> object used to provide code completion for the expression evaluation.
+            </summary>
+            <param name="position">current execution position</param>
+            <param name="keyConfiguration">key configuration</param>
+            <returns></returns>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluation.ValueEvaluationResult">
+            <summary>
+            Provides data for result of successful evaluation.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluation.ValueEvaluationResult.#ctor(System.String,System.String,Alternet.Scripter.Debugger.ExpressionEvaluation.EvaluatedMemberMetadata,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of <c>ValueEvaluationResult</c> with specified settings.
+            </summary>
+            <param name="expression">Evaluated expression.</param>
+            <param name="name">Name of the result.</param>
+            <param name="metadata">Evaluation metadata.</param>
+            <param name="valueString">String value representation.</param>
+            <param name="hasChildren">Indicates whether evaluation result has children.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.ValueEvaluationResult.Metadata">
+            <summary>
+            Represents evaluation metadata.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.ValueEvaluationResult.ValueString">
+            <summary>
+            Represents evaluation value as string.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluation.ValueEvaluationResult.HasChildren">
+            <summary>
+            Represents boolean value indicating whether result has children.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ScriptBreakpointsBase">
+            <summary>
+            Provides list of <c>Breakpoint</c> objects.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.#ctor(Alternet.Scripter.Debugger.IScriptDebuggerBase)">
+            <summary>
+            Initializes a new instance of the <c>ScriptBreakpoints</c> class with corresponds to specified <c>ScriptDebugger</c> object.
+            </summary>
+            <param name="debugger"><c>ScriptDebugger</c> that owns this new instance.</param>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.ScriptBreakpointsBase.Changed">
+            <summary>
+            Occurs when breakpoints are changed.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.ScriptBreakpointsBase.BreakpointAdded">
+            <summary>
+            Occurs when a breakpoint is added.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.ScriptBreakpointsBase.BreakpointRemoved">
+            <summary>
+            Occurs when a breakpoint is removed.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.ScriptBreakpointsBase.BreakpointStateChanged">
+            <summary>
+            Occurs when a breakpoint state is changed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ScriptBreakpointsBase.Debugger">
+            <summary>
+            Represents <c>ScriptDebugger</c> owner of this <c>ScriptBreakpoints</c>.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ScriptBreakpointsBase.Breakpoints">
+            <summary>
+            Gets an array of <c>Breakpoint</c> objects.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.AddBreakpoint(System.String,System.Int32)">
+            <summary>
+            Adds a <c>Breakpoint</c> to the list.
+            </summary>
+            <param name="filePath">Name of file where breakpoint is set.</param>
+            <param name="lineNumber">Number of line at which breakpoint is set.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.RemoveBreakpoint(Alternet.Scripter.Debugger.Breakpoint)">
+            <summary>
+            Removes a <c>Breakpoint</c> from the list.
+            </summary>
+            <param name="breakpoint">The <c>Breakpoint</c> to remove from the list.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.RemoveBreakpoints(System.Collections.Generic.IList{Alternet.Scripter.Debugger.Breakpoint})">
+            <summary>
+            Removes several <c>Breakpoint</c> from the list.
+            </summary>
+            <param name="breakpoints">The number of <c>Breakpoint</c> to remove from the list.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.Clear">
+            <summary>
+            Removes all breakpoints.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.SaveFile(System.String)">
+            <summary>
+            Saves breakpoint content to the specific file.
+            </summary>
+            <param name="fileName">Name of file to save content.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.LoadFile(System.String)">
+            <summary>
+            Loads breakpoint content from the specified file.
+            </summary>
+            <param name="fileName">Name of the file to load.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.SaveStream(System.IO.Stream)">
+            <summary>
+            Saves breakpoint content to the specific stream.
+            </summary>
+            <param name="stream">The Stream object to save content.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.LoadStream(System.IO.Stream)">
+            <summary>
+            Loads breakpoint content from the specified stream.
+            </summary>
+            <param name="stream">The Stream object to load content.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.EnableBreakpoint(Alternet.Scripter.Debugger.Breakpoint,System.Boolean)">
+            <summary>
+            Enables or disables specified breakpoint.
+            </summary>
+            <param name="breakpoint"><c>Breakpoint</c> to process.</param>
+            <param name="enable">New breakpoint's state.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.BeginUpdate">
+            <summary>
+            Maintains performance while breakpoints are added/removed one at a time by preventing the <see cref="E:Alternet.Scripter.Debugger.ScriptBreakpointsBase.Changed"/> event from being fired.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.EndUpdate">
+            <summary>
+            Maintains performance while breakpoints are added/removed one at a time by preventing the <see cref="E:Alternet.Scripter.Debugger.ScriptBreakpointsBase.Changed"/> event from being fired.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.DisableUpdate">
+            <summary>
+            Maintains performance while breakpoints are added/removed one at a time by preventing the <see cref="E:Alternet.Scripter.Debugger.ScriptBreakpointsBase.Changed"/> event from being fired.
+            Using DisableUpdate/EnableUpdate to prevent notifying about updating the object state.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.EnableUpdate">
+            <summary>
+            Maintains performance while breakpoints are added/removed one at a time by preventing the <see cref="E:Alternet.Scripter.Debugger.ScriptBreakpointsBase.Changed"/> event from being fired.
+            Using DisableUpdate/EnableUpdate to prevent notifying about updating the object state.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ScriptBreakpointsBase.Update">
+            <summary>
+            Raises Changed event
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.BaseDefaultDebuggerUICommands.StartDebuggingOptions">
+            <summary>
+            Gets or sets <see cref="P:Alternet.Scripter.Debugger.BaseDefaultDebuggerUICommands.StartDebuggingOptions"/> to use when
+            the debugging starts while executing commands such as <see cref="M:Alternet.Scripter.Debugger.BaseDefaultDebuggerUICommands.Start"/> or <see cref="M:Alternet.Scripter.Debugger.BaseDefaultDebuggerUICommands.StepOver"/>.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.BaseDefaultDebuggerUICommands.RunToCursor">
+            <summary>
+            Executes statements of code to the cursor position.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.Breakpoint">
+            <summary>
+            <c>Breakpoint</c> class is used to store individual breakpoint within debugger breakpoint collection.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.Breakpoint.Enabled">
+            <summary>
+            Gets or sets a boolean value indicating whether this breakpoint is enabled.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.Breakpoint.FilePath">
+            <summary>
+            Gets or sets the name of the file where breakpoint is set.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.Breakpoint.LineNumber">
+            <summary>
+            Gets or sets number of line at which breakpoint is set.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.DebuggerCapabilities">
+            <summary>
+            Defines debugger capabilities.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.DebuggerCapabilities.None">
+            <summary>
+            No capabilities.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.DebuggerCapabilities.SetValue">
+            <summary>
+            Debugger is capable of setting variable values.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.DebuggerCapabilities.BreakpointStatement">
+            <summary>
+            Debugger is capable of setting breakpoint statement.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.DebuggerCapabilities.Threads">
+            <summary>
+            Debugger is capable of managing program threads.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.DebuggerCapabilities.BreakOnStart">
+            <summary>
+            Debugger supports breaking on start.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.DebuggerConsts">
+            <summary>
+            Contains default constants related to debugger errors.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.DebuggerState">
+            <summary>
+            Specifies the possible debugger states.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.DebuggerState.Off">
+            <summary>
+            Debugger is off.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.DebuggerState.Startup">
+            <summary>
+            Debugger is ready to start.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.DebuggerState.Running">
+            <summary>
+            Debugger is running.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.DebuggerState.Stopped">
+            <summary>
+            Debugger is stopped.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.DebuggerState.Shutdown">
+            <summary>
+            Debugger is shutting down.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ActiveThreadChangedEventArgs">
+            <summary>
+            Provides data for the <c>IScriptDebugger.ActiveThreadChanged</c> event.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ActiveThreadChangedEventArgs.ActivatedThread">
+            <summary>
+            Gets or sets newly activated thread.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ActiveThreadChangedEventArgs.DeactivatedThread">
+            <summary>
+            Gets or sets deactivated thread.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ActiveThreadChangedEventArgs.ErrorMessage">
+            <summary>
+            Gets or sets an error message. Non empty if some error occurred while changing active thread.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.BreakpointEventArgs">
+            <summary>
+            Provides data for the debugger breakpoint change events.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.BreakpointEventArgs.#ctor(Alternet.Scripter.Debugger.Breakpoint)">
+            <summary>
+            Initializes a new instance of <see cref="T:Alternet.Scripter.Debugger.BreakpointEventArgs"/> class.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.BreakpointEventArgs.Breakpoint">
+            <summary>
+            The <see cref="P:Alternet.Scripter.Debugger.BreakpointEventArgs.Breakpoint"/> instance related to the event.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.DebuggerErrorOccuredEventArgs">
+            <summary>
+            Provides data for the <c>IScriptDebugger.DebuggerError</c> event.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.DebuggerErrorOccuredEventArgs.Exception">
+            <summary>
+            Gets or sets the Exception to process.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.DebuggerStateChangedEventArgs">
+            <summary>
+            Provides data for the <c>IScriptDebugger.StateChanged</c> event.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.DebuggerStateChangedEventArgs.OldState">
+            <summary>
+            Gets or sets debugger state before change.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.DebuggerStateChangedEventArgs.NewState">
+            <summary>
+            Gets or sets new debugger state.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.DebuggingStartedEventArgs">
+            <summary>
+            Provides data for the <c>IScriptDebugger.DebuggingStarted</c> event.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.DebuggingStoppedEventArgs">
+            <summary>
+            Provides data for the <c>IScriptDebugger.DebuggingStopped</c> event.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExecutionResumedEventArgs">
+            <summary>
+            Provides data for the <c>IScriptDebugger.ExecutionResumed</c> event.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExecutionStoppedEventArgs">
+            <summary>
+            Provides data for the <c>IScriptDebugger.ExecutionStopped</c> event.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExecutionStoppedEventArgs.Position">
+            <summary>
+            Gets or sets execution position (line number and file name).
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExecutionStoppedEventArgs.Exception">
+            <summary>
+            Gets or sets information about execution exception.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExecutionStoppedEventArgs.StopReason">
+            <summary>
+            Gets or sets reason of stop.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluationRequest">
+            <summary>
+            Represents data for ExpressionEvaluation request.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExpressionEvaluationRequest.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <c>ExpressionEvaluationRequest</c> class with specified expression.
+            </summary>
+            <param name="expression">Expression to be evaluated.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluationRequest.Expression">
+            <summary>
+            Represents expression to be evaluated.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluationRequest.ExpandValues">
+            <summary>
+            Gets or sets a boolean value indicating whether values of the expression's children should be expanded.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluationResult">
+            <summary>
+            Represents data of evaluated expression.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluationResult.Result">
+            <summary>
+            Gets or sets information of expression to evaluate.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluationResult.Children">
+            <summary>
+            Gets or sets a list of child expressions if present.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluationResult.Expression">
+            <summary>
+            Gets or sets expression to evaluate.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExpressionEvaluationResultItem">
+            <summary>
+            Represents information describes expression evaluation result.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluationResultItem.Expression">
+            <summary>
+            Gets or sets expression to evaluate.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluationResultItem.Value">
+            <summary>
+            Gets or sets a value that is result of expression evaluation.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluationResultItem.Type">
+            <summary>
+            Gets or sets an expression type.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluationResultItem.CanExpand">
+            <summary>
+            Gets or sets a boolean value indicates whether expression can be expanded.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExpressionEvaluationResultItem.ErrorMessage">
+            <summary>
+            Gets or sets an error message. Non empty if some error occurred while evaluating expression.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.LogMessageReceivedEventArgs">
+            <summary>
+            Provides data for the <c>IScriptDebugger.LogMessageReceived</c> event.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.LogMessageReceivedEventArgs.Message">
+            <summary>
+            Gets or sets log message.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.SourceFileLocationResolveEventArgs">
+            <summary>
+            Provides data for the <see cref="!:IScriptDebuggerBase.ResolveSourceFileLocation"/> event.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.StackFramesRetrievalResult">
+            <summary>
+            Provides data for method calls that are currently on a stack.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.StackFramesRetrievalResult.#ctor">
+            <summary>
+            Initializes a new instance of the <c>StackFramesRetrievalResult</c> class with default settings.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StackFramesRetrievalResult.Frames">
+            <summary>
+            Gets or sets a list of stack frames.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.StackFrameSwitchedEventArgs">
+            <summary>
+            Provides data for the <c>IScriptDebugger.StackFrameSwitched</c> event.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StackFrameSwitchedEventArgs.Frame">
+            <summary>
+            Gets or sets a stack frame to switch to.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StackFrameSwitchedEventArgs.ErrorMessage">
+            <summary>
+            Gets or sets an error message. Non empty if some error occurred while switching frame.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ThreadsRetrievalResult">
+            <summary>
+            Provides data for list of active threads.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ThreadsRetrievalResult.#ctor">
+            <summary>
+            Initializes a new instance of the <c>ThreadsRetrievalResult</c> class with default settings.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ThreadsRetrievalResult.Threads">
+            <summary>
+            Gets or sets a list of active threads
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.VariablesRetrievalResult">
+            <summary>
+            Provides data for list of variable names.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.VariablesRetrievalResult.#ctor">
+            <summary>
+            Initializes a new instance of the <c>VariablesRetrievalResult</c> class with default settings.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.VariablesRetrievalResult.VariableNames">
+            <summary>
+            Gets or sets a list of variable names.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExceptionDescription">
+            <summary>
+            Represents information describes an exception occurred during process execution.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExceptionDescription.ExceptionType">
+            <summary>
+            Gets or sets an exception type.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExceptionDescription.Message">
+            <summary>
+            Gets or sets a message that describes exception.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExceptionDescription.ExceptionEvaluationExpression">
+            <summary>
+            Gets or sets an expression that is a source of exception.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.ExceptionDescription.ToString">
+            <summary>
+            Returns a <c>String</c> that represents the exception.
+            </summary>
+            <returns>A <c>String</c> that represents the <c>ExceptionDescription</c>.</returns>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExecutionPosition">
+            <summary>
+            Represents information describes process's execution position.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExecutionPosition.File">
+            <summary>
+            Gets or sets the name of the file that is executed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExecutionPosition.Line">
+            <summary>
+            Gets or sets line number that is executed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExecutionPosition.StartLine">
+            <summary>
+            Gets or sets start line number that is executed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExecutionPosition.EndLine">
+            <summary>
+            Gets or sets end line number that is executed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExecutionPosition.StartColumn">
+            <summary>
+            Gets or sets start column number that is executed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ExecutionPosition.EndColumn">
+            <summary>
+            Gets or sets end column number that is executed.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ExecutionStopReason">
+            <summary>
+            Defines possible causes stop execution.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExecutionStopReason.Break">
+            <summary>
+            Execution stopped because of <c>IScriptDebugger.Break</c> method called.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExecutionStopReason.BreakpointHit">
+            <summary>
+            Execution stopped because process reached breakpoint.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExecutionStopReason.StepComplete">
+            <summary>
+            Execution stopped because process completes next step.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExecutionStopReason.Exception">
+            <summary>
+            Execution stopped because process raises exception.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExecutionStopReason.UnhandledException">
+            <summary>
+            Execution stopped because process raises exception and it was unhandled.
+            </summary>
+        </member>
+        <member name="F:Alternet.Scripter.Debugger.ExecutionStopReason.SetNextStatement">
+            <summary>
+            Execution stopped because user set next statement.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.AllowedDebuggerCommands">
+            <summary>
+            Represents commands allowed by the Debugger UI.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.IDebuggerUICommands">
+            <summary>
+            Represents Debugger commands processed by the Debugger UI.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.IDebuggerUICommands.StartDebuggingOptions">
+            <summary>
+            When implemented by a class, gets or sets <see cref="P:Alternet.Scripter.Debugger.IDebuggerUICommands.StartDebuggingOptions"/> to use when
+            the debugging starts while executing commands such as <see cref="M:Alternet.Scripter.Debugger.IDebuggerUICommands.Start"/> or <see cref="M:Alternet.Scripter.Debugger.IDebuggerUICommands.StepOver"/>.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.PreStartup">
+            <summary>
+            This method is invoked before debugger starts execution.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.Start">
+            <summary>
+            When implemented by a class, starts executing the program from the entry point with specified settings.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.StartWithoutDebug">
+            <summary>
+            When implemented by a class, run script starting from the main entry point.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.Continue">
+            <summary>
+            When implemented by a class, continues given process to the next breakpoint or until process finishes.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.Compile">
+            <summary>
+            When implemented by a class, initializes script engine and compiles the script.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.Stop">
+            <summary>
+            When implemented by a class, stops executing the program.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.Break">
+            <summary>
+            When implemented by a class, causes the given process to pause its execution so that its current state can be analyzed.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.StepInto">
+            <summary>
+            When implemented by a class, executes one statement of code; steps into the next function call, if possible.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.StepOver">
+            <summary>
+            When implemented by a class, executes one statement of code; steps over the next function call.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.StepOut">
+            <summary>
+            When implemented by a class, steps out of the current function.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.EvaluateExpression">
+            <summary>
+            When implemented by a class, displays EvaluateDialog.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.EvaluateCurrentException">
+            <summary>
+            When implemented by a class, displays EvaluateDialog for current exception.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IDebuggerUICommands.RunToCursor">
+            <summary>
+            When implemented by a class, executes statements of code to the cursor position.
+            </summary>
+            <returns>true if succeed otherwise false;</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScopeResolutionService.Reset">
+            <summary>
+            Resets scope evaluator.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScopeResolutionService.GetMethodName(System.String,System.Drawing.Point,System.Collections.Generic.IList{System.String},System.Boolean,System.Boolean)">
+            <summary>
+            When implemented by a class, gets method name and parameters and given source position.
+            </summary>
+            <param name="fileName">file name go parse</param>
+            <param name="position">position within the file</param>
+            <param name="parameters">receives list of parameters</param>
+            <param name="includeParamNames">Indicate if parameter names should be included</param>
+            <param name="includeParamTypes">Indicate if parameter types should be included</param>
+            <returns>Method name if found, otherwise empty string.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScopeResolutionService.GetRelativeFilePath(System.String)">
+            <summary>
+            When implemented by a class, gets path relative to the script location
+            </summary>
+            <param name="fileName">File name.</param>
+            <returns>File name relative to the script location.</returns>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.IScriptBreakpoints">
+            <summary>
+            Represents methods and properties declaration to describe list of breakpoints.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptBreakpoints.Changed">
+            <summary>
+            When implemented by a class, occurs when breakpoints are changed.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptBreakpoints.BreakpointAdded">
+            <summary>
+            When implemented by a class, occurs when a breakpoint is added.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptBreakpoints.BreakpointRemoved">
+            <summary>
+            When implemented by a class, occurs when a breakpoint is removed.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptBreakpoints.BreakpointStateChanged">
+            <summary>
+            When implemented by a class, occurs when a breakpoint state is changed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.IScriptBreakpoints.Breakpoints">
+            <summary>
+            When implemented by a class, gets an array of <c>Breakpoint</c> objects.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptBreakpoints.AddBreakpoint(System.String,System.Int32)">
+            <summary>
+            When implemented by a class, adds a <c>Breakpoint</c> to the list.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptBreakpoints.RemoveBreakpoint(Alternet.Scripter.Debugger.Breakpoint)">
+            <summary>
+            When implemented by a class, removes a <c>Breakpoint</c> from the list.
+            </summary>
+            <param name="breakpoint">The <c>Breakpoint</c> to remove from the list.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptBreakpoints.RemoveBreakpoints(System.Collections.Generic.IList{Alternet.Scripter.Debugger.Breakpoint})">
+            <summary>
+            When implemented by a class, removes several <c>Breakpoint</c> from the list.
+            </summary>
+            <param name="breakpoints">The number of <c>Breakpoint</c> to remove from the list.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptBreakpoints.EnableBreakpoint(Alternet.Scripter.Debugger.Breakpoint,System.Boolean)">
+            <summary>
+            When implemented by a class, enables or disables specified breakpoint.
+            </summary>
+            <param name="breakpoint"><c>Breakpoint</c> to process.</param>
+            <param name="enable">New breakpoint's state.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptBreakpoints.Clear">
+            <summary>
+            When implemented by a class, removes all breakpoints.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptBreakpoints.SaveFile(System.String)">
+            <summary>
+            When implemented by a class, saves breakpoint content to the specific file.
+            </summary>
+            <param name="fileName">Name of file to save content.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptBreakpoints.LoadFile(System.String)">
+            <summary>
+            When implemented by a class, loads breakpoint content from the specified file.
+            </summary>
+            <param name="fileName">Name of the file to load.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptBreakpoints.SaveStream(System.IO.Stream)">
+            <summary>
+            When implemented by a class, saves breakpoint content to the specific stream.
+            </summary>
+            <param name="stream">The Stream object to save content.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptBreakpoints.LoadStream(System.IO.Stream)">
+            <summary>
+            When implemented by a class, loads breakpoint content from the specified stream.
+            </summary>
+            <param name="stream">The Stream object to load content.</param>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.IScriptDebuggerBase">
+            <summary>
+            Provides methods and properties that allow developers to debug applications in the common language runtime (CLR) environment.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.BeforeContinue">
+            <summary>
+            When implemented by a class, occurs before debugger continues to program execution.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.BeforeStep">
+            <summary>
+            When implemented by a class, occurs before debugger performs a step.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.BeforeStop">
+            <summary>
+            When implemented by a class, occurs before debugger stop debugging.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.SourceFileLocationResolve">
+            <summary>
+            When implemented by a class, occurs when source file location resolution is requested.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.ActiveThreadChanged">
+            <summary>
+            When implemented by a class, occurs when thread to be debugged changes.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.DebuggerErrorOccured">
+            <summary>
+             When implemented by a class, occurs when encounters error during debugging session.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.DebuggingStarted">
+            <summary>
+            When implemented by a class, occurs when debugging session is started.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.DebuggingStopped">
+            <summary>
+            When implemented by a class, occurs when debugging session is stopped.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.ExecutionResumed">
+            <summary>
+            When implemented by a class, occurs when debugging is resumed after being paused.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.ExecutionStopped">
+            <summary>
+            When implemented by a class, occurs when debugging is paused.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.LogMessageReceived">
+            <summary>
+            When implemented by a class, occurs when debug message is received.
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.StackFrameSwitched">
+            <summary>
+            When implemented by a class, occurs debugger switches to the stack frame
+            </summary>
+        </member>
+        <member name="E:Alternet.Scripter.Debugger.IScriptDebuggerBase.StateChanged">
+            <summary>
+             When implemented by a class, occurs when debugger state is changed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.IScriptDebuggerBase.Breakpoints">
+            <summary>
+            When implemented by a class, returns collection of debugger breakpoints.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.IScriptDebuggerBase.EventsSyncAction">
+            <summary>
+            When implemented by a class, gets or sets an action used to synchronize events raising.
+            This is normally a function provided by the application to sync raised debugger events (for example, perform Control.Invoke)
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.IScriptDebuggerBase.IsStarted">
+            <summary>
+            When implemented by a class, indicates whether debugging was started.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.IScriptDebuggerBase.ScriptRun">
+            <summary>
+            When implemented by a class, contains all information required to compile and run the script
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.IScriptDebuggerBase.State">
+            <summary>
+            When implemented by a class, gets current debugger state.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.IScriptDebuggerBase.Options">
+            <summary>
+            When implemented by a class, gets start debugging options.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.IScriptDebuggerBase.ExpressionEvaluator">
+            <summary>
+            When implemented by a class, gets <c>IExpressionEvaluator</c> object used to evaluate expressions.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.IScriptDebuggerBase.ScopeResolutionService">
+            <summary>
+            When implemented by a class, gets <c>IScopeResolutionService</c> object used to evaluate method names and parameters.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.IScriptDebuggerBase.Capabilities">
+            <summary>
+            When implemented by a class, gets debugger capabilities.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.ActivateThread(System.Int32)">
+            <summary>
+            When implemented by a class, switches debugging to the specified thread.
+            </summary>
+            <param name="threadId">Thread ID to be activated.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.StartDebugging(Alternet.Scripter.Debugger.StartDebuggingOptions)">
+            <summary>
+            When implemented by a class, starts executing the program from the entry point with specified settings.
+            </summary>
+            <param name="options">Settings of debug process.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.StartDebugging">
+            <summary>
+            When implemented by a class, starts executing the program from the entry point with default settings.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.RunScript(System.String[])">
+            <summary>
+            When implemented by a class, executes the script without debugging.
+            </summary>
+            <param name="args">Optionsl command-line arguments.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.RunScriptAsync(System.String[])">
+            <summary>
+            When implemented by a class, starts executing the script without debugging.
+            </summary>
+            <param name="args">Optionsl command-line arguments.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.Break">
+            <summary>
+            When implemented by a class, causes the given process to pause its execution so that its current state can be analyzed.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.Continue">
+            <summary>
+            When implemented by a class, continues given process to the next breakpoint or until process finishes.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.StepInto">
+            <summary>
+            When implemented by a class, executes one statement of code; steps into the next function call, if possible.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.StepOut">
+            <summary>
+            When implemented by a class, executes one statement of code; steps out of the function currently being executed.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.StepOver">
+            <summary>
+            When implemented by a class, executes one statement of code; steps over the next function call.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.StopDebuggingAsync(System.Threading.CancellationToken)">
+            <summary>
+            When implemented by a class, stops executing the program.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.SwitchToStackFrame(Alternet.Scripter.Debugger.StackFrame)">
+            <summary>
+            When implemented by a class, switches debugging to the given stack frame.
+            </summary>
+            <param name="frame"><c>StackFrame</c> to be switched to.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.SetRunToPositionBreakpoint(Alternet.Scripter.Debugger.RunToPositionBreakpoint)">
+            <summary>
+            When implemented by a class, causes debugger to stop at the specified position.
+            </summary>
+            <param name="breakpoint">Position in the source file.</param>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.TrySetNextStatementAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            When implemented by a class, tries to set the execution point to the specified line of code.
+            </summary>
+            <param name="lineNumber">Line number to be going to.</param>
+            <returns>Result of executing.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.GetStackFramesAsync(System.Threading.CancellationToken)">
+            <summary>
+            When implemented by a class, gets list of method calls that are currently on a stack
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.GetVariablesInScopeAsync(System.Threading.CancellationToken)">
+            <summary>
+            When implemented by a class, receives all local variables based on the current stack frame.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.GetExecutionPositionAsync(System.Threading.CancellationToken)">
+            <summary>
+            When implemented by a class, finds out current <c>ExecutionPosition</c> based on the current stack frame.
+            </summary>
+            <returns>Position of execution.</returns>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.EvaluateExpressionAsync(Alternet.Scripter.Debugger.ExpressionEvaluationRequest,System.Threading.CancellationToken)">
+            <summary>
+            When implemented by a class, evaluates an expression based on the current stack frame. If the expression can be parsed but not evaluated, an object is returned but will not contain a valid value.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.EvaluateCurrentExceptionAsync(System.Threading.CancellationToken)">
+            <summary>
+            When implemented by a class, evaluates current expression based on the current stack frame.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.EvaluateExpressionsAsync(System.Collections.Generic.IEnumerable{Alternet.Scripter.Debugger.ExpressionEvaluationRequest},System.Threading.CancellationToken)">
+            <summary>
+            When implemented by a class, evaluates an expression based on the current stack frame. If the expression can be parsed but not evaluated, an object is returned but will not contain a valid value.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.ClearTemporaryGeneratedModules">
+            <summary>
+            When implemented by a class, clears temporary generated modules on disk.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.IScriptDebuggerBase.GetThreadsAsync(System.Threading.CancellationToken)">
+            <summary>
+            When implemented by a class, gets list of active threads.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.RunToPositionBreakpoint">
+            <summary>
+            Specifies breakpoint position inside the file.
+            </summary>
+        </member>
+        <member name="M:Alternet.Scripter.Debugger.RunToPositionBreakpoint.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <c>RunToPositionBreakpoint</c> class with specified parameters.
+            </summary>
+            <param name="fileName">Name of file where breakpoint is set.</param>
+            <param name="lineNumber">Index of line at which breakpoint is set.</param>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.RunToPositionBreakpoint.FilePath">
+            <summary>
+            Gets or sets the name of the file where breakpoint is set.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.RunToPositionBreakpoint.LineNumber">
+            <summary>
+            Gets or sets number of line at which breakpoint is set.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.StackFrame">
+            <summary>
+            Represents information describes particular stack frame.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StackFrame.Name">
+            <summary>
+            Gets or sets stack frame name.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StackFrame.IsManaged">
+            <summary>
+            Gets or sets a boolean value indicating whether stack frame is managed.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StackFrame.IsMyCode">
+            <summary>
+            Gets or sets a boolean value indicating whether stack frame is inside executing script.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StackFrame.Line">
+            <summary>
+            Gets or sets stack frame line.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StackFrame.File">
+            <summary>
+            Gets or sets stack frame file.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StackFrame.IsTop">
+            <summary>
+            Gets or sets a boolean value indicating whether stack frame is current frame.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StackFrame.Index">
+            <summary>
+            Gets or sets stack frame index.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.StartDebuggingOptions">
+            <summary>
+            Defines debug process settings.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StartDebuggingOptions.Default">
+            <summary>
+            Defines default debug process settings.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StartDebuggingOptions.BreakOnStart">
+            <summary>
+            Gets or sets a boolean value indicating whether debugging should be paused immediately after start.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StartDebuggingOptions.BreakOnExceptions">
+            <summary>
+            Gets or sets a boolean flag that indicates whether the debugger should break on script exceptions. Default is <c>true</c>.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StartDebuggingOptions.BreakOnUnhandledExceptions">
+            <summary>
+            Gets or sets a boolean flag that indicates whether the debugger should break on unhandled script exceptions. Default is <c>true</c>.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StartDebuggingOptions.Arguments">
+            <summary>
+            Gets or sets command line argument for debug process.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StartDebuggingOptions.HostApplication">
+            <summary>
+            Gets or sets host application for dll being debugged.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StartDebuggingOptions.MyCodeModules">
+            <summary>
+            Gets or sets an array of full paths to modules treated as "My Code" for Just My Code debugging.
+            If null, the main executable module is treated as "My Code".
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StartDebuggingOptions.DisableJustMyCode">
+            <summary>
+            Gets or sets a boolean value indicating Just My Code is enabled. If true, MyCodeModules property has no effect.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StartDebuggingOptions.MethodName">
+            <summary>
+            Gets or set method name to execute when debugging the method.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.StartDebuggingOptions.MethodArgs">
+            <summary>
+            Gets or set method arguments to debug the method.
+            </summary>
+        </member>
+        <member name="T:Alternet.Scripter.Debugger.ThreadInfo">
+            <summary>
+            Provides data for the <c>ThreadClick</c> event.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ThreadInfo.ThreadId">
+            <summary>
+            Gets or sets thread's ID.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ThreadInfo.Title">
+            <summary>
+            Gets or sets title associated with the thread.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ThreadInfo.IsActive">
+            <summary>
+            Gets or sets a value indicating whether the thread in the active state.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ThreadInfo.Line">
+            <summary>
+            Gets or sets line of the execution position associated with the thread.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ThreadInfo.File">
+            <summary>
+            Gets or sets file name of execution position associated with the thread.
+            </summary>
+        </member>
+        <member name="P:Alternet.Scripter.Debugger.ThreadInfo.HasNoManagedFrames">
+            <summary>
+            Gets or sets a value indicating whether the thread has unmanaged frames.
+            </summary>
+        </member>
+    </members>
+</doc>
