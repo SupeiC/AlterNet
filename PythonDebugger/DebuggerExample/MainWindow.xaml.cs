@@ -32,6 +32,10 @@ namespace DebuggerExample
         {
             InitializeComponent();
 
+            Trace.WriteLine("Start");
+            test();
+            Trace.WriteLine("End");
+
             _pythonScriptRunner = new PythonScriptRunner();
             if (!_pythonScriptRunner.IsEnabled)
             {
@@ -41,14 +45,48 @@ namespace DebuggerExample
 
             SetRunning(false);
             SetRunningStopped(false);
-            debugEditor.Text = _pythonScriptRunner.GetPythonExample();
+
+            textEditor.Text = _pythonScriptRunner.GetPythonExample4();
+            textEditor.Lexer = _pythonScriptRunner.GetLexer();
+
+            debugEditor.FileName = "sample.py";
+            debugEditor.SingleEditorDebuggingUI = true;
+            debugEditor.Text = _pythonScriptRunner.GetPythonExample4();
             debugEditor.Lexer = _pythonScriptRunner.GetLexer();
             debugEditor.Debugger = RenewDebugBreakPoints(null);
+            
+        }
+
+        private void test()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                var output = i * 2;
+                Trace.WriteLine("output: " + output);
+            }
         }
 
         #region Toolbar
 
         private void btnRun_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SetRunning(true);
+                SetRunningStopped(false);
+
+                debugEditor.Debugger = _pythonScriptRunner.GetScriptDebugger(textEditor.Text);
+
+                // work
+                debugEditor.Debugger.ScriptRun.Run();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Run ex: " + ex.Message + "\nStackTrace: " + ex.StackTrace, "Error", MessageBoxButton.OK);
+            }
+        }
+
+        private void btnRunDebug_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -63,15 +101,14 @@ namespace DebuggerExample
                     SetRunningStopped(false);
 
                     debugEditor.Debugger = RenewDebugBreakPoints(debugEditor.Debugger.Breakpoints.Breakpoints.ToArray());
-                    debugEditor.Debugger.StartDebugging(new StartDebuggingOptions()
-                    {
-                        BreakOnStart = true,
-                    });
+
+                    // not work
+                    debugEditor.Debugger.StartDebugging(new StartDebuggingOptions());
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Run ex: " + ex.Message + "\nStackTrace: " + ex.StackTrace, "Error", MessageBoxButton.OK);
+                MessageBox.Show("RunDebug ex: " + ex.Message + "\nStackTrace: " + ex.StackTrace, "Error", MessageBoxButton.OK);
             }
         }
 
@@ -173,6 +210,7 @@ namespace DebuggerExample
         {
             Trace.WriteLine("[Debugger_DebuggingStopped]" + e.ToString());
             SetRunning(false);
+            SetRunningStopped(false);
             ClearExecutionPosition();
         }
 

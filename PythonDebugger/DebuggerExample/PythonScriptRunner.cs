@@ -27,7 +27,7 @@ namespace DebuggerExample
             }
         }
 
-        public string GetPythonExample()
+        public string GetPythonExample1()
         {
             return
 @"
@@ -39,6 +39,70 @@ print(""Hello"")
 x = 2
 y = 3
 print(""x + y = "" + str(x + y))
+";
+        }
+
+        public string GetPythonExample2()
+        {
+            return
+@"
+import string
+import sys
+import os
+
+max = 3
+print(""start"")
+for x in range(max):
+    out = x * 2
+    print(""Value: "" + str(out))
+print(""end"")
+";
+        }
+
+        public string GetPythonExample3()
+        {
+            return
+@"
+import string
+import sys
+import os
+
+def test():
+    for x in range(max):
+        out = x * 2
+        print(""Value: "" + str(out))
+
+max = 3
+print(""start"")
+test()
+print(""end"")
+";
+        }
+
+        public string GetPythonExample4()
+        {
+            return
+@"
+import sys
+from bokeh.plotting import figure, output_file, show, save
+
+try:
+    # instantiating the figure object
+    graph = figure(title=""Bokeh Line Graph"")
+
+    # the points to be plotted
+    x = [1, 2, 3, 4, 5]
+    y = [5, 4, 3, 2, 1]
+
+    # plotting the line graph
+    graph.line(x, y)
+    print(""Ex1: "")
+
+    # displaying the model
+    show(graph)
+except:
+    exc_type, exc_value, exc_traceback = sys.exc_info()
+    print(""Exception : "" + str(exc_value))
 ";
         }
 
@@ -60,7 +124,7 @@ print(""x + y = "" + str(x + y))
         public PythonNETParser GetLexer()
         {
             var parser = new PythonNETParser();
-            parser.CodeEnvironment = GetScriptRunner(string.Empty).CodeEnvironment;
+            parser.CodeEnvironment = GetScriptRunner(string.Empty, string.Empty).CodeEnvironment;
             return parser;
         }
 
@@ -68,14 +132,14 @@ print(""x + y = "" + str(x + y))
         {
             return new ScriptDebugger()
             {
-                ScriptRun = GetScriptRunner(text),
+                ScriptRun = GetScriptRunner(text, "sample.py"),
             };
         }
 
-        private ScriptRun GetScriptRunner(string text)
+        private ScriptRun GetScriptRunner(string text, string fileName)
         {
             var scriptRunner = new ScriptRun();
-            scriptRunner.ScriptSource.FromScriptCode(text);
+            scriptRunner.ScriptSource.FromScriptCode(text, fileName);
             scriptRunner.ScriptHost.SkipSyntaxErrorCheck = true;
             scriptRunner.ScriptSource.ReferencedFrameworks = Alternet.Common.DotNet.Framework.Wpf;
             scriptRunner.ScriptSource.Imports.Add("System");
@@ -129,6 +193,8 @@ print(""x + y = "" + str(x + y))
                 PythonEngine.Shutdown();
             }
 
+            Trace.WriteLine("PathToDLL: " + PathToDLL);
+            //C:\Users\su-pei cheng\AppData\Local\Programs\Python\Python39\python39.dll
             Runtime.PythonDLL = PathToDLL;
             PythonEngine.Initialize();
             PythonEngine.BeginAllowThreads();
